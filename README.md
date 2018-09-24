@@ -12,7 +12,7 @@ the development of a Python project based on a minimal working structure.
 * A preconfigured setup.py file following the suggestions from [here](https://github.com/kennethreitz/setup.py);
 * [Sphinx](http://www.sphinx-doc.org/en/master/) autodocumentation with [autodoc](https://docs-python2readthedocs.readthedocs.io/en/master/code-doc.html);
 * [Travis CI](https://travis-ci.com) minimal configuration;
-* Testing with [pytest](https://docs.pytest.org/en/latest/);
+* Tests with [pytest](https://docs.pytest.org/en/latest/);
 * Hierarquical structure to a python package as suggested by ["The Hitchhiker’s Guide to Python"](https://docs.python-guide.org/) (highly recommended reading);
 * A [Read The Docs](https://readthedocs.org/) configuration scratch.
 
