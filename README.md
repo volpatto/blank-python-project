@@ -18,7 +18,7 @@ the development of a Python project based on a minimal working structure.
 
 ## Contributions
 
-Contributions are VERY welcome. But please be aware of the purpose of the repo: **A minimal working structure.** If you want to add a feature which is very particular to your needs, please analyse if it fits the objetive.
+Contributions are VERY welcome. But please be aware of the purpose of the repo: **A minimal working structure.** If you want to add a feature which is very particular to your needs, please analyse if it fits the objective.
 
 Suggestions and advices are welcome as well.
 
