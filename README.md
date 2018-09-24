@@ -9,7 +9,7 @@ the development of a Python project based on a minimal working structure.
 
 ## Covered features
 
-* A preconfigured setup.py file following the suggestions from [here](https://github.com/kennethreitz/setup.py)
+* A preconfigured setup.py file following the suggestions from [here](https://github.com/kennethreitz/setup.py);
 * Sphinx autodocumentation with autodoc;
 * Travis CI minimal configuration;
 * Testing with pytest;
