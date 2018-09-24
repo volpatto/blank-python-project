@@ -18,7 +18,7 @@ URL = 'https://github.com//me/myproject'
 EMAIL = 'your.email@somewhere.com'
 AUTHOR = 'Your name'
 REQUIRES_PYTHON = '>=3.6.1'  # Put your required Python version
-VERSION = None  # Put the package version as a string (ex.: '1.0.0')
+VERSION = '0.1'  # Put the package version as a string (ex.: '1.0.0')
 
 # What packages are required for this module to be executed?
 REQUIRED = [
