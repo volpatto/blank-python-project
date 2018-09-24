@@ -1,5 +1,7 @@
 # A generic blank Python project
 
+[![Build Status](https://travis-ci.com/volpatto/blank-python-project.svg?branch=master)](https://travis-ci.com/volpatto/blank-python-project)
+
 This repo provides a scratch of a Python project. Its purpose is to serve as start point for
 the development of a Python project based on a minimal working structure.
 
