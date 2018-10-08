@@ -5,7 +5,7 @@
 [![Documentation Status](https://readthedocs.org/projects/blank-python-project/badge/?version=latest)](https://blank-python-project.readthedocs.io/en/latest/?badge=latest)
 
 This repo provides a scratch of a Python project. Its purpose is to serve as starting point for
-the development of a Python project based on a minimal working structure.
+the development of a Python project, based on a minimal working structure.
 
 ## Covered features
 
@@ -18,10 +18,10 @@ the development of a Python project based on a minimal working structure.
 
 ## Contributions
 
-Contributions are VERY welcome. But please be aware of the purpose of the repo: **A minimal working structure.** If you want to add a feature which is very particular to your needs, please analyse if it fits the objective.
+Contributions are VERY welcome. But please, be aware of the purpose of the repo: **A minimal working structure.** If you want to add a feature which is very particular to your needs, please analyse if it fits the objective.
 
 Suggestions and advices are welcome as well.
 
 ## Contact
 
-One can contact me through the email <volpatto@lncc.br>.
+Contact me through the email: <volpatto@lncc.br>.
