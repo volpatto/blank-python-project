@@ -24,4 +24,4 @@ Suggestions and advices are welcome.
 
 ## Contact
 
-One can contact me through the email <volpatto@lncc.br>.
+My name is Diego. Feel free to contact me through the email <volpatto@lncc.br>.
