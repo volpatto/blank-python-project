@@ -15,6 +15,7 @@ matrix:
       language: shell
 
 install:
+  - pip3 install virtualenv
   - virtualenv devenv
   - source devenv/bin/activate
   - pip3 install -r requirements.txt
