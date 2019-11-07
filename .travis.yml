@@ -15,7 +15,7 @@ matrix:
       language: shell
 
 install:
-  - pip3 install virtualenv
+  - pip3 install virtualenv  # this line have to be performed in Travis OSX, but it's not required for linux
   - virtualenv devenv
   - source devenv/bin/activate
   - pip3 install -r requirements.txt
