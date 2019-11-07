@@ -2,8 +2,12 @@ language: python
 python:
   - "3.6"
 install:
+  - python3 -m venv devenv
+  - source devenv/bin/activate
   - pip install -r requirements.txt
+  - pre-commit install
 script:
+  - pre-commit run --all-files
   - pytest
 notifications:
   email:
