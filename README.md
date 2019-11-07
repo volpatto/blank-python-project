@@ -14,13 +14,18 @@ the development of a Python project based on a minimal working structure.
 * [Travis CI](https://travis-ci.com) minimal configuration;
 * Tests with [pytest](https://docs.pytest.org/en/latest/);
 * Hierarchical structure to a python package as suggested by ["The Hitchhiker’s Guide to Python"](https://docs.python-guide.org/) (highly recommended reading);
-* A [Read The Docs](https://readthedocs.org/) configuration scratch.
+* A [Read The Docs](https://readthedocs.org/) configuration scratch;
+* [pre-commit](https://pre-commit.com/) to perform git hooks before commits. The following plugins are being used:
+    - trailing-whitespace
+    - end-of-file-fixer
+    - black (default options combined with customized line length to 100 chars per line)
+    - blacken-docs
 
 ## Contributions
 
 Contributions are VERY welcome. But please be aware of the purpose of the repo: **A minimal working structure.** If you want to add a feature which is very particular to your needs, please analyse if it fits the objective.
 
-Suggestions and advices are welcome.
+Suggestions and advices are welcome, feel free to open an Issue or send me an email.
 
 ## Contact
 
