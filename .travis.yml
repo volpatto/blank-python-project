@@ -5,8 +5,10 @@ branches:
 matrix:
   include:
     - os: linux
+      language: python
       python: "3.6"
     - os: linux
+      language: python
       python: "3.7"
     - os: osx
       osx_image: xcode11.2
