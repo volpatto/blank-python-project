@@ -1,6 +1,16 @@
 name: linux-osx
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+  schedule:
+  - cron: "0 5 * * 1"
 
 jobs:
   build:
@@ -8,6 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       max-parallel: 4
+      fail-fast: false
       matrix:
         python-version: [3.6, 3.7]
         os: [ubuntu-latest, macOS-latest]

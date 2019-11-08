@@ -5,3 +5,4 @@
 ./docs/.static/
 ./docs/.templates/
 devenv/
+mypackage.egg-info/
