@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.com/volpatto/blank-python-project.svg?branch=master)](https://travis-ci.com/volpatto/blank-python-project)
-![Build GH Actions](https://github.com/volpatto/blank-python-project/workflows/build/badge.svg?branch)
+![Build GH Actions](https://github.com/volpatto/blank-python-project/workflows/.github/workflows/linux-osx.yml/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/blank-python-project/badge/?version=latest)](https://blank-python-project.readthedocs.io/en/latest/?badge=latest)
 
 This repo provides a scratch of a Python project. Its purpose is to serve as starting point for
