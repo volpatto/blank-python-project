@@ -10,7 +10,7 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.6, 3.7]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        os: [ubuntu-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -21,7 +21,7 @@ jobs:
     - name: Create virtualenv
       run: |
         pip install virtualenv
-        virtualenv --python=${{ matrix.python-version }} .env
+        virtualenv .env
         source .env/bin/activate
     - name: Install dependencies
       run: |
