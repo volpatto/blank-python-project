@@ -1,4 +1,4 @@
-name: Ubuntu and macOS build
+name: linux-osx
 
 on: [push]
 
