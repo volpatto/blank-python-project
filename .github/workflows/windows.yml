@@ -21,7 +21,7 @@ jobs:
       run: |
         pip install virtualenv
         virtualenv .env
-        .env/bin/activate
+        .env\Scripts\activate
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
