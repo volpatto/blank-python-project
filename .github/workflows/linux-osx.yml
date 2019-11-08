@@ -21,7 +21,7 @@ jobs:
     - name: Create virtualenv
       run: |
         pip install virtualenv
-        virtualenv --python=${{ python-version }} .env
+        virtualenv --python=${{ matrix.python-version }} .env
         source .env/bin/activate
     - name: Install dependencies
       run: |
