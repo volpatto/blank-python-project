@@ -25,6 +25,7 @@ the development of a Python project based on a minimal working structure.
     - end-of-file-fixer
     - black (default options combined with customized line length to 100 chars per line)
     - blacken-docs
+* Coverage of the package with [Codecov](https://codecov.io/).
 
 ## Contributions
 
