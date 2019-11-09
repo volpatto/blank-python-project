@@ -45,7 +45,7 @@ jobs:
         pre-commit run --all-files
     - name: Test with pytest
       run: |
-        pytest . --cov-config=.coveragerc --cov-report xml --cov=blank-python-project
+        pytest . --cov-config=.coveragerc --cov-report=xml --cov=mypackage
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.0.3
       with:
