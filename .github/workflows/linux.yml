@@ -16,6 +16,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: 8ba4642e-d908-4f3d-b617-6e50f0b11009
     strategy:
       max-parallel: 4
       fail-fast: false
@@ -43,4 +45,9 @@ jobs:
         pre-commit run --all-files
     - name: Test with pytest
       run: |
-        pytest .
+        pytest . --cov-config=.coveragerc --cov-report=xml --cov=mypackage
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{env.CODECOV_TOKEN}}
+        file: ./coverage.xml
