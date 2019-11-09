@@ -43,4 +43,6 @@ jobs:
         pre-commit run --all-files
     - name: Test with pytest
       run: |
-        pytest .
+        pytest . --cov-config=.coveragerc --cov-report xml --cov=blank-python-project
+    - name: Publish coverage with codecov
+      run: codecov
