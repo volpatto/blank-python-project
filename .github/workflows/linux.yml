@@ -16,6 +16,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: "8ba4642e-d908-4f3d-b617-6e50f0b11009"
     strategy:
       max-parallel: 4
       fail-fast: false
