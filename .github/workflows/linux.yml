@@ -48,5 +48,3 @@ jobs:
       run: codecov
     - name: Codecov
       uses: codecov/codecov-action@v1.0.0
-
-
