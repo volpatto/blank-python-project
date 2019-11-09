@@ -5,6 +5,7 @@
 ![](https://github.com/volpatto/blank-python-project/workflows/linux/badge.svg?branch=master)
 ![](https://github.com/volpatto/blank-python-project/workflows/osx/badge.svg?branch=master)
 ![](https://github.com/volpatto/blank-python-project/workflows/windows/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/volpatto/blank-python-project/branch/master/graph/badge.svg)](https://codecov.io/gh/volpatto/blank-python-project)
 [![Documentation Status](https://readthedocs.org/projects/blank-python-project/badge/?version=latest)](https://blank-python-project.readthedocs.io/en/latest/?badge=latest)
 
 This repo provides a scratch of a Python project. Its purpose is to serve as starting point for
