@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = gibbs
+source = blank-python-project
 
 omit =
     tests/*
