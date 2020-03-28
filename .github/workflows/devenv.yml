@@ -1,0 +1,54 @@
+name: linux
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+  schedule:
+  - cron: "0 5 * * 1"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      fail-fast: false
+      matrix:
+        python-version: [3.6, 3.7]
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: goanpeca/setup-miniconda@v1
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.python-version }}
+    - name: Configure conda
+      shell: bash -l {0}
+      run: |
+        conda config --set always_yes yes --set changeps1 no
+        conda config --add channels conda-forge
+        conda install conda-devenv
+        conda update -q conda
+        conda info -a
+        conda devenv
+        source activate blank-project
+    - name: pre-commit Checkers and Formatters
+      shell: bash -l {0}
+      run: |
+        pre-commit install
+        pre-commit run --all-files
+    - name: Test with pytest
+      shell: bash -l {0}
+      run: |
+        pytest . --cov-config=.coveragerc --cov-report=xml --cov=mypackage
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage.xml
