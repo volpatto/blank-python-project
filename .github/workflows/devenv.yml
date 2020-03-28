@@ -14,10 +14,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup conda
@@ -46,8 +43,3 @@ jobs:
         run: |
           source activate blank-project
           pytest . --cov-config=.coveragerc --cov-report=xml --cov=mypackage
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1.0.3
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ./coverage.xml
