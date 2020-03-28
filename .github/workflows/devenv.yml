@@ -27,6 +27,7 @@ jobs:
           conda-channels: conda-forge
       - run: conda --version
       - name: Configure conda-devenv
+        shell: bash -l {0}
         run: |
           conda config --set always_yes yes --set changeps1 no
           conda install conda-devenv
@@ -35,10 +36,12 @@ jobs:
           conda devenv
           conda activate blank-project
       - name: pre-commit Checkers and Formatters
+        shell: bash -l {0}
         run: |
           pre-commit install
           pre-commit run --all-files
       - name: Test with pytest
+        shell: bash -l {0}
         run: |
           pytest . --cov-config=.coveragerc --cov-report=xml --cov=mypackage
       - name: Upload coverage to Codecov
