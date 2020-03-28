@@ -19,6 +19,9 @@ the development of a Python project based on a minimal working structure.
 * [Travis CI](https://travis-ci.com) minimal configuration;
 * [GitHub Actions](https://github.com/features/actions) workflows with minimal configurations for latest Ubuntu, macOS and Windows;
 * Tests with [pytest](https://docs.pytest.org/en/latest/);
+* Development environment with two options:
+    * The classic [virtualenv](https://virtualenv.pypa.io/en/latest/)
+    * A [conda](https://conda.io/en/latest/) environment with [conda-devenv](https://github.com/ESSS/conda-devenv) extension
 * Hierarchical structure to a python package as suggested by ["The Hitchhiker’s Guide to Python"](https://docs.python-guide.org/) (highly recommended reading);
 * A [Read The Docs](https://readthedocs.org/) configuration scratch;
 * [pre-commit](https://pre-commit.com/) to perform git hooks before commits. The following plugins are being used:
