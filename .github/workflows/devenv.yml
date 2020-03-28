@@ -34,7 +34,7 @@ jobs:
           conda update -q conda
           conda info -a
           conda devenv
-          conda activate blank-project
+          source activate blank-project
       - name: pre-commit Checkers and Formatters
         shell: bash -l {0}
         run: |
