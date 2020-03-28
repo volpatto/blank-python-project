@@ -19,15 +19,12 @@ jobs:
     strategy:
       max-parallel: 4
       fail-fast: false
-      matrix:
-        python-version: [3.6, 3.7]
 
     steps:
     - uses: actions/checkout@v1
-    - uses: goanpeca/setup-miniconda@v1
+    - uses: goanpeca/setup-miniconda@v1.0.2
         with:
           auto-update-conda: true
-          python-version: ${{ matrix.python-version }}
     - name: Configure conda
       shell: bash -l {0}
       run: |
@@ -37,10 +34,10 @@ jobs:
         conda update -q conda
         conda info -a
         conda devenv
-        source activate blank-project
     - name: pre-commit Checkers and Formatters
       shell: bash -l {0}
       run: |
+        source activate blank-project
         pre-commit install
         pre-commit run --all-files
     - name: Test with pytest
