@@ -33,7 +33,7 @@ jobs:
           conda update -q conda
           conda info -a
           conda devenv
-          source activate blank-project
+          conda activate blank-project
       - name: pre-commit Checkers and Formatters
         run: |
           pre-commit install
