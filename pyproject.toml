@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mypackage"
-version = "0.1"
+version = "0.1.0"
 description = "A short description"
 readme = "README.md"
 keywords = ["template", "python", "project"]
-requires-python = ">=3.6.1"
+requires-python = ">=3.11"
 license = "MIT"
 
 authors = [
