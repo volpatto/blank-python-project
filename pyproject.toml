@@ -24,10 +24,12 @@ dependencies = [
 
 classifiers = [
   "License :: OSI Approved :: MIT License",
-  "Development Status :: 1 - Planning",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.6"
 ]
 
-[tool.black]
-line-length = 100
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "mypackage",
+]
