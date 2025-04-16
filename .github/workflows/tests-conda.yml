@@ -95,11 +95,3 @@ jobs:
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Annotate coverage
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' }}
-        uses: khaeru/coverage-gh@v1.0.1
-        with:
-          token: ${{ github.token }}
-          data-file: .coverage
-          threshold: 100.0
