@@ -221,3 +221,33 @@ def dev_install(ctx):
         raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
+
+
+@task
+def deploy_docs_local(ctx):
+    """
+    Deploy MkDocs pages locally.
+    """
+    task_output_message = "Deploying Docs locally"
+    _task_screen_log(task_output_message)
+    base_command = "mkdocs serve"
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag, echo=True)
+
+
+@task
+def deploy_docs_gh(ctx):
+    """
+    Deploy MkDocs pages to Github.
+    """
+    task_output_message = "Deploying Docs to Github"
+    _task_screen_log(task_output_message)
+    base_command = "mkdocs gh-deploy"
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag, echo=True)
