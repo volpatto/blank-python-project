@@ -1,2 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mypackage"
+version = "0.1"
+description = "A short description"
+readme = "README.md"
+requires-python = ">=3.6.1"
+license = { text = "MIT" }
+
+authors = [
+  { name = "Your name", email = "your.email@somewhere.com" }
+]
+
+urls = { Homepage = "https://github.com//me/myproject" }
+
+dependencies = [
+  "numpy",
+  "pytest",
+  "numpydoc"
+]
+
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Development Status :: 1 - Planning",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.6"
+]
+
 [tool.black]
 line-length = 100
