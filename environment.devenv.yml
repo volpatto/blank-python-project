@@ -25,7 +25,6 @@ dependencies:
   - mkdocs
   - mkdocs-material
   - mkdocstrings-python
-  - mkdocs-autorefs
 
   # Hooks for git
   - pre-commit
