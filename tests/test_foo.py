@@ -1,14 +1,13 @@
 import pytest
 import numpy as np
 
-import mypackage.foo
+from mypackage import foo
 
 
 @pytest.mark.parametrize("dim", [3, 4, 5])
 def test_a_function(dim):
-
-    output = mypackage.foo.a_function(x=0.0, dim=dim)
-
-    pass_conditions = output == pytest.approx(np.ones(dim))
-    if not pass_conditions:
-        raise AssertionError()
+    """
+    Checks if foo.a_function is consistent when x = 0.
+    """
+    output = foo.a_function(x=0.0, dim=dim)
+    assert output == pytest.approx(np.ones(dim))

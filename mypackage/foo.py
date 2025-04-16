@@ -5,19 +5,18 @@ A generic module to use as example.
 import numpy as np
 
 
-def a_function(x, dim):
+def a_function(x: float, dim: int) -> np.ndarray:
     """
     Define a generic function.
 
-    :param float x:
+    :param x:
         The function's argument array.
 
-    :param int dim:
+    :param dim:
         Number of dimensions to expand.
 
     :return:
         The evaluated function at the given input array.
-    :rtype: float
     """
     f = np.ones(dim) + x
     return f
