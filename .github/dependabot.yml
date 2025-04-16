@@ -5,7 +5,7 @@
 version: 2
 updates:
 
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: github-actions
     directory: "/"
     schedule:
       # Check for updates to GitHub Actions every week
@@ -15,6 +15,7 @@ updates:
     # and gather them into a single PR.
     # Based on here: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/optimizing-pr-creation-version-updates#prioritizing-meaningful-updates
     groups:
-      patterns:
-      # A wildcard to collect all the workflows
-        - "*"
+      github-actions:
+        patterns:
+        # A wildcard to collect all the workflows
+          - "*"
