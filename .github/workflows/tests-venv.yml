@@ -50,17 +50,17 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
-      - name: Create virtualenv
+      - name: Create virtualenv on Ubuntu/macOS
         if: matrix.os != 'windows-latest'
         run: |
           python -m venv .venv
-          source .env/bin/activate
+          source .venv/bin/activate
 
-      - name: Create virtualenv
+      - name: Create virtualenv on Windows
         if: matrix.os == 'windows-latest'
         run: |
           python -m venv .venv
-          source .env/bin/activate
+          .venv\Scripts\activate
 
       - name: Install dependencies
         run: |
