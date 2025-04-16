@@ -1,6 +1,7 @@
 name: blank-project
 channels:
   - conda-forge
+
 dependencies:
   # Python stack
   - python>=3.6
@@ -9,6 +10,8 @@ dependencies:
   - pytest>=3.8.0
   - scipy>=1.1.0
   - mypy
+  - invoke
+  - rich
 
   # For tests
   - pytest>=3.8.0
