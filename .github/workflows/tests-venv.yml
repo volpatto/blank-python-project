@@ -1,0 +1,86 @@
+name: Tests using venv
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    types: ["opened", "synchronize", "reopened", "labeled", "unlabeled"]
+
+  schedule:
+      # Syntax: "[min] [hour] [day of the month] [month] [day of the week]"
+      # Note: day of the week starts in Sunday (0), ends in Saturday (6)
+    - cron: "0 0 * * 1"  # runs at 00:00 UTC on Mondays
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+
+    name: ${{ matrix.os }} -- Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    env:
+      PY: ${{ matrix.python-version }}
+    permissions:
+      # Gives the action the necessary permissions for publishing new
+      # comments in pull requests. Required for Coverage reports.
+      pull-requests: write
+      contents: write
+      checks: write
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["windows-latest", "ubuntu-latest", "macOS-latest"]
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Create virtualenv on Ubuntu/macOS
+        if: matrix.os != 'windows-latest'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+
+      - name: Create virtualenv on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          python -m venv .venv
+          .venv\Scripts\activate
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          inv dev-install
+
+      - name: Test with pytest on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          inv tests -n 2
+
+      - name: Test with pytest on Ubuntu/macOS
+        if: matrix.os != 'windows-latest'
+        run: |
+          inv tests -n 2 --check-coverage
+
+      - name: Upload Coverage PR comment
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' }}
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          ANNOTATE_MISSING_LINES: true

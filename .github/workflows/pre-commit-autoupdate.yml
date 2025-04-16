@@ -1,0 +1,26 @@
+name: Pre-commit auto-update
+
+on:
+  schedule:
+    - cron: "0 1 * * 1"  # runs at 01:00 UTC on Mondays
+  # on demand
+  workflow_dispatch:
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+
+      - uses: browniebroke/pre-commit-autoupdate-action@deb83bfe0036e1116ee4e241d6220274d69b1f9e
+
+      - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-pre-commit-hooks
+          title: Update pre-commit hooks
+          commit-message: "GHA: update pre-commit hooks"
+          body: Update versions of pre-commit hooks to latest version.

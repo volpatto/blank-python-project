@@ -1,13 +1,17 @@
 name: blank-project
 channels:
   - conda-forge
+
 dependencies:
   # Python stack
-  - python>=3.6
-  - black
+  - python={{ get_env("PY", default="3.11") }}
+  - ruff
   - numpy>=1.13.3
   - pytest>=3.8.0
   - scipy>=1.1.0
+  - mypy
+  - invoke
+  - rich
 
   # For tests
   - pytest>=3.8.0
@@ -18,6 +22,9 @@ dependencies:
   # For documentation
   - sphinx
   - sphinx_rtd_theme
+  - mkdocs
+  - mkdocs-material
+  - mkdocstrings-python
 
   # Hooks for git
   - pre-commit

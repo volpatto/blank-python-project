@@ -1,17 +1,14 @@
 [run]
 branch = True
-source = blank-python-project
+relative_files = True
 
 omit =
-    tests/*
     notebooks/*
+    *__init__.py
 
 [report]
 exclude_lines =
     if self.debug:
     pragma: no cover
-    raise NotImplementedError
+    raise NotImplementedError*
     if __name__ == .__main__.:
-ignore_errors = True
-omit =
-    tests/*
