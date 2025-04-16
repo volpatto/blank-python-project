@@ -1,0 +1,20 @@
+# Each Github Actions has versions, so we somehow need to keep it up-to-date.
+# This GH Actions is an approach to handle this problem using dependabot.
+# See docs here: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
+
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
+
+    # Since we have a lot of workflows, it is better to save time and PRs
+    # and gather them into a single PR.
+    # Based on here: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/optimizing-pr-creation-version-updates#prioritizing-meaningful-updates
+    groups:
+      patterns:
+      # A wildcard to collect all the workflows
+        - "*"
