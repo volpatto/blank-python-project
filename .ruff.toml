@@ -27,6 +27,7 @@ exclude = [
     "site-packages",
     "venv",
     "notebooks",
+    "docs",
 ]
 
 line-length = 100
