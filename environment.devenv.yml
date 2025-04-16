@@ -4,7 +4,7 @@ channels:
 
 dependencies:
   # Python stack
-  - python>=3.6
+  - python={{ get_env("PY", default="3.11") }}
   - ruff
   - numpy>=1.13.3
   - pytest>=3.8.0
