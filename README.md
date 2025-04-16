@@ -2,7 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Build Status](https://travis-ci.com/volpatto/blank-python-project.svg?branch=master)](https://travis-ci.com/volpatto/blank-python-project)
 ![](https://github.com/volpatto/blank-python-project/workflows/linux/badge.svg?branch=master)
 ![](https://github.com/volpatto/blank-python-project/workflows/osx/badge.svg?branch=master)
 ![](https://github.com/volpatto/blank-python-project/workflows/windows/badge.svg?branch=master)
@@ -16,7 +15,6 @@ the development of a Python project based on a minimal working structure.
 
 * A preconfigured setup.py file following the suggestions from [here](https://github.com/kennethreitz/setup.py);
 * [Sphinx](http://www.sphinx-doc.org/en/master/) autodocumentation with [autodoc](https://docs-python2readthedocs.readthedocs.io/en/master/code-doc.html);
-* [Travis CI](https://travis-ci.com) minimal configuration;
 * [GitHub Actions](https://github.com/features/actions) workflows with minimal configurations for latest Ubuntu, macOS and Windows;
 * Tests with [pytest](https://docs.pytest.org/en/latest/);
 * Development environment with two options:
