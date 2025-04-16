@@ -24,6 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       PY: ${{ matrix.python-version }}
+      IS_ENV_LOCKED: false  # set as 'true' if using conda-lock
     permissions:
       # Gives the action the necessary permissions for publishing new
       # comments in pull requests. Required for Coverage reports.
@@ -65,6 +66,11 @@ jobs:
           conda list
           conda config --show-sources
           conda config --show
+
+      - name: Configuring conda-lock
+        if: env.IS_ENV_LOCKED
+        run: |
+          conda install conda-lock
 
       - name: Configuring conda-devenv
         run: |

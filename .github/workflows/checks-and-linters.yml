@@ -1,0 +1,143 @@
+name: Checks and Linters
+
+on:
+
+  pull_request:
+    types: ["opened", "synchronize", "reopened", "labeled", "unlabeled"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  hooks:
+
+    name: Run hooks
+    runs-on: ubuntu-latest
+    env:
+      IS_ENV_LOCKED: false  # set as 'true' if using conda-lock
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Setup Conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          channels: conda-forge
+          channel-priority: true
+          auto-activate-base: false
+          allow-softlinks: true
+          activate-environment: ''
+
+      - name: Check Conda
+        run: |
+          conda info
+          conda list
+          conda config --show-sources
+          conda config --show
+
+      - name: Configuring conda-lock
+        if: env.IS_ENV_LOCKED
+        run: |
+          conda install conda-lock
+
+      - name: Configuring conda-devenv
+        run: |
+          conda install "conda-devenv>=3"
+          conda devenv
+
+      - name: Run pre-commit hooks
+        shell: bash -el {0}
+        run: |
+          conda activate blank-project
+          inv run-hooks --all-files
+
+  mypy:
+
+    name: Run mypy on diff
+    runs-on: ubuntu-latest
+    permissions:
+      # Gives the action the necessary permissions for publishing new
+      # comments in pull requests.
+      pull-requests: write
+      contents: write
+      checks: write
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Get diff files (.py only inside mypackage)
+        run: |
+          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- mypackage | grep '\.py$' | tr '\n' ' ')" >> $GITHUB_ENV
+
+      - name: Annotate mypy issues in PR
+        uses: tsuyoshicho/action-mypy@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: warning
+          target: ${{ env.CHANGED_FILES }}
+          setup_method: install
+          setup_command: 'pip install mypy'
+          filter_mode: added
+          install_types: false
+
+  typos:
+
+    name: Check for Typos
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+      checks: write
+    strategy:
+      fail-fast: false
+
+    steps:
+
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: Get diff files (.py only inside mypackage)
+      run: |
+        echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- mypackage | grep '\.py$' | tr '\n' ' ')" >> $GITHUB_ENV
+
+    - uses: Shemnei/reviewdog-action-typos@main
+      with:
+        reporter: github-pr-review
+        level: warning
+        filter_mode: added
+        files: ${{ env.CHANGED_FILES }}
+        locale: en
