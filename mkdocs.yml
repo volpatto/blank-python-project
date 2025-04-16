@@ -1,0 +1,18 @@
+site_name: mypackage's Docs
+
+theme:
+  name: "material"
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+            python:
+              options:
+                docstring_style: sphinx
+
+# Define the navigation bar
+nav:
+  - Introduction: index.md
+  - API Reference: reference.md

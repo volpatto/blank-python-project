@@ -1,5 +1,9 @@
 """
 A generic module to use as example.
+
+This module provides:
+
+* `a_function(x, dim)`: a function tailored for a calculation.
 """
 
 import numpy as np
