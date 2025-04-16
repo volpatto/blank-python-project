@@ -5,3 +5,4 @@ sphinx_rtd_theme
 pre-commit
 pytest-cov
 codecov
+mypy
