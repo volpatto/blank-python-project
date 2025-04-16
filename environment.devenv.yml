@@ -17,6 +17,7 @@ dependencies:
   - pytest>=3.8.0
   - pytest-cov
   - pytest-xdist
+  - coverage=6.5.0  # pin required to run Coverage Annotations in PRs
   - codecov
 
   # For documentation
