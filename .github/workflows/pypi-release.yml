@@ -13,9 +13,6 @@ jobs:
       PACKAGE_NAME: mypackage  # set the package name here
       SERVER: test.pypi  # change to pypi for a real release
       SERVER_NAME: testpypi  # change to pypi for a real release
-    environment:
-      name: ${{ env.SERVER_NAME }}
-      url: https://${{ env.SERVER }}.org/p/${{ env.PACKAGE_NAME }}
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing,
                        # You need to configure your PyPI or TestPyPI beforehand to have
