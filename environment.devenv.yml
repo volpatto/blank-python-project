@@ -17,11 +17,8 @@ dependencies:
   - pytest>=3.8.0
   - pytest-cov
   - pytest-xdist
-  - codecov
 
   # For documentation
-  - sphinx
-  - sphinx_rtd_theme
   - mkdocs
   - mkdocs-material
   - mkdocstrings-python
