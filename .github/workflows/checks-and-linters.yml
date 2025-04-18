@@ -99,7 +99,7 @@ jobs:
 
       - name: Get diff files (.py only inside mypackage)
         run: |
-          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- mypackage | grep '\.py$' | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- src/mypackage | grep '\.py$' | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Annotate mypy issues in PR
         uses: tsuyoshicho/action-mypy@v4
@@ -133,7 +133,7 @@ jobs:
 
     - name: Get diff files (.py only inside mypackage)
       run: |
-        echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- mypackage | grep '\.py$' | tr '\n' ' ')" >> $GITHUB_ENV
+        echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- src/mypackage | grep '\.py$' | tr '\n' ' ')" >> $GITHUB_ENV
 
     - uses: Shemnei/reviewdog-action-typos@main
       with:

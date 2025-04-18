@@ -31,8 +31,17 @@ Documentation = "https://volpatto.github.io/blank-python-project/"
 Repository = "https://github.com/volpatto/blank-python-project"
 Issues = "https://github.com/volpatto/blank-python-project/issues"
 
+[tool.setuptools]
+# map the “root” of all your packages to src/
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+# look under src/ for any packages matching "mypackage*"
+where  = ["src"]
+include = ["mypackage*"]
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = [
-    "mypackage",
+    "src/mypackage",
 ]
