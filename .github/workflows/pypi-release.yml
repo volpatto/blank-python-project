@@ -1,0 +1,58 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # put here the versioning/tag pattern used in the package
+
+jobs:
+  pypi-publish:
+    name: Upload release to PyPI
+    runs-on: ubuntu-latest
+    env:  # convenient var envs
+      SERVER: test.pypi  # change to pypi for a real release
+    permissions:
+      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing,
+                       # You need to configure your PyPI or TestPyPI beforehand to have
+                       # trusted publishing working properly.
+                       # See: https://docs.pypi.org/trusted-publishers/adding-a-publisher/
+      contents: read  # for checkout step
+
+    steps:
+      # For a "real" release, consider this approach. Review SERVER value defined in the workflow env.
+
+    - name: Check out code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0      # so tags/history are available
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install build tool
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade build
+
+    - name: Build distributions
+      run: |
+        rm -rf dist
+        python -m build --sdist --wheel --outdir dist
+
+      # For a proper release.
+    - name: Publish package distributions to PyPI
+      if: ${{ env.SERVER == 'pypi' }}
+      uses: pypa/gh-action-pypi-publish@release/v1
+
+      # For tests purpose only. It needs the TEST_PYPI_API_TOKEN to be set
+      # repo-wisely. You should go to the TestPyPI page and cofigure your
+      # account.
+    - name: Publish package distributions to TestPyPI
+      if: ${{ env.SERVER == 'test.pypi' }}
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        verbose: true

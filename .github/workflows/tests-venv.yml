@@ -22,8 +22,6 @@ jobs:
 
     name: ${{ matrix.os }} -- Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
-    env:
-      PY: ${{ matrix.python-version }}
     permissions:
       # Gives the action the necessary permissions for publishing new
       # comments in pull requests. Required for Coverage reports.

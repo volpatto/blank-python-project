@@ -1,0 +1,42 @@
+name: Create tags from pre-release PRs
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  create_tag:
+    # Only run when the PR was merged and its title starts with "Release "
+    if: >
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.title, 'Release ')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git author
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Read version from pyproject.toml
+        id: get_version
+        run: |
+          version=$(grep -Po '(?<=^version = ")[^"]+' pyproject.toml)
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Create & push Git tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: v${{ steps.get_version.outputs.version }}
+        run: |
+          git tag $TAG
+          git push origin $TAG

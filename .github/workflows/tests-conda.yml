@@ -23,7 +23,6 @@ jobs:
     name: ${{ matrix.os }} -- Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     env:
-      PY: ${{ matrix.python-version }}
       IS_ENV_LOCKED: false  # set as 'true' if using conda-lock
     permissions:
       # Gives the action the necessary permissions for publishing new
