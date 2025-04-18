@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "blank-python-package"
-version = "0.1.9"
+version = "0.1.10"
 description = "A short description"
 readme = "README.md"
 keywords = ["template", "python", "project"]
