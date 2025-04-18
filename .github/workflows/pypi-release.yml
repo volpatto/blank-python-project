@@ -49,9 +49,12 @@ jobs:
       if: ${{ env.SERVER == 'pypi' }}
       uses: pypa/gh-action-pypi-publish@release/v1
 
-      # For tests purpose only.
+      # For tests purpose only. It needs the TEST_PYPI_API_TOKEN to be set
+      # repo-wisely.
     - name: Publish package distributions to TestPyPI
       if: ${{ env.SERVER == 'test.pypi' }}
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/
+        user: __token__
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
