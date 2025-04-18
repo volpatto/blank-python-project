@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mypackage"
+name = "mypackage-volpatto"
 version = "0.1.6"
 description = "A short description"
 readme = "README.md"
