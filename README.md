@@ -27,7 +27,7 @@ This repo provides a scratch of a Python project. Its purpose is to serve as sta
 
 ## Contributions
 
-Contributions are VERY welcome. But please be aware of the purpose of the repo: **A minimal working structure.** If you want to add a feature which is very particular to your needs, please analyse if it fits the objective.
+Contributions are VERY welcome. But please be aware of the purpose of the repo: **A minimal working structure.** If you want to add a feature which is very particular to your needs, please analyse if it fits the goals of this template.
 
 Suggestions and advices are welcome, feel free to open an Issue or send me an email.
 
