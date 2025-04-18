@@ -2,11 +2,10 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/volpatto/blank-python-project/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                           |    Stmts |     Miss |   Branch |   BrPart |    Cover |   Missing |
-|------------------------------- | -------: | -------: | -------: | -------: | -------: | --------: |
-| mypackage/\_tests/test\_foo.py |        7 |        0 |        0 |        0 |     100% |           |
-| mypackage/foo.py               |        4 |        0 |        0 |        0 |     100% |           |
-|                      **TOTAL** |   **11** |    **0** |    **0** |    **0** | **100%** |           |
+| Name                 |    Stmts |     Miss |   Branch |   BrPart |    Cover |   Missing |
+|--------------------- | -------: | -------: | -------: | -------: | -------: | --------: |
+| src/mypackage/foo.py |        4 |        0 |        0 |        0 |     100% |           |
+|            **TOTAL** |    **4** |    **0** |    **0** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
