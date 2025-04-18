@@ -10,9 +10,7 @@ jobs:
     name: Upload release to PyPI
     runs-on: ubuntu-latest
     env:  # convenient var envs
-      PACKAGE_NAME: blank-python-package  # set the package name here
       SERVER: test.pypi  # change to pypi for a real release
-      SERVER_NAME: testpypi  # change to pypi for a real release
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing,
                        # You need to configure your PyPI or TestPyPI beforehand to have
@@ -21,8 +19,7 @@ jobs:
       contents: read  # for checkout step
 
     steps:
-      # For a "real" release, consider this approach. Review PACKAGE_NAME, SERVER, and SERVER_NAME
-      # defined in env.
+      # For a "real" release, consider this approach. Review SERVER value defined in the workflow env.
 
     - name: Check out code
       uses: actions/checkout@v4
@@ -50,7 +47,8 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
 
       # For tests purpose only. It needs the TEST_PYPI_API_TOKEN to be set
-      # repo-wisely.
+      # repo-wisely. You should go to the TestPyPI page and cofigure your
+      # account.
     - name: Publish package distributions to TestPyPI
       if: ${{ env.SERVER == 'test.pypi' }}
       uses: pypa/gh-action-pypi-publish@release/v1
