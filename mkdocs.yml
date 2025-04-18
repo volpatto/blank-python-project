@@ -14,3 +14,5 @@ plugins:
 nav:
   - Introduction: index.md
   - API Reference: reference.md
+
+repo_url: https://github.com/volpatto/blank-python-project
