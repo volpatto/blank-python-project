@@ -102,7 +102,7 @@ jobs:
           echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- src/mypackage | grep '\.py$' | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Annotate mypy issues in PR
-        uses: tsuyoshicho/action-mypy@v4
+        uses: tsuyoshicho/action-mypy@v5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
