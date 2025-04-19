@@ -167,3 +167,6 @@ environment.yml
 
 # VS Code files
 .vscode/
+
+# Linters
+.ruff_cache/
