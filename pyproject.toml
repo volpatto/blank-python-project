@@ -31,6 +31,22 @@ Documentation = "https://volpatto.github.io/blank-python-project/"
 Repository = "https://github.com/volpatto/blank-python-project"
 Issues = "https://github.com/volpatto/blank-python-project/issues"
 
+[project.optional-dependencies]
+dev = [
+  "pre-commit",
+  "pytest-cov",
+  "pytest-xdist",
+  "coverage",
+  "mypy",
+  "invoke",
+  "rich",
+]
+docs = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocstrings-python",
+]
+
 [tool.setuptools]
 # map the “root” of all your packages to src/
 package-dir = { "" = "src" }
