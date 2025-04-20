@@ -1,0 +1,33 @@
+name: Automerge PR
+
+on:
+  pull_request:
+    types: [labeled, synchronize, opened]
+    branches:
+      - main
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    # Only run if the PR has the "automerge" label
+    if: contains(github.event.pull_request.labels.*.name, 'automerge')
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensure we fetch all commits, not just the latest
+
+      - name: Wait for all status checks to pass
+        uses: pascalgn/automerge-action@v0.15.4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          merge_method: squash
+          # This will wait for all checks to pass before proceeding
+
+      - name: Automerge PR
+        if: success() # Only merge if all checks pass
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --squash --delete-branch --auto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
