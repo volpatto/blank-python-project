@@ -24,6 +24,12 @@ jobs:
             GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
             MERGE_METHOD: "squash"
             MERGE_REQUIRED_APPROVALS: "0"  # add the minimal number of reviewers here
+            MERGE_RETRY_SLEEP: "60000"  # time to wait to merge in miliseconds (current: 1 min)
+            MERGE_RETRIES: "10"  # The number of retries between each MERGE_RETRY_SLEEP.
+                                 # Current: after each minute (since MERGE_RETRY_SLEEP: "60000"),
+                                 # the job will check the PR and see if it is ready to go with
+                                 # all checks passing. With the current settings, this step will
+                                 # wait a total of 10 minutes.
 
       - name: Automerge PR
         if: success() # Only merge if all checks pass
