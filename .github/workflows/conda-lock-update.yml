@@ -1,0 +1,82 @@
+name: Update conda-lock
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"  # runs at 03:00 UTC on Mondays
+  # This workflow can also be trigged on demand
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-locks:
+    runs-on: ${{ matrix.os }}
+    env:
+      PY: "3.12"
+    permissions:
+      contents: write
+      pull-requests: write
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["windows-latest", "ubuntu-latest", "macos-13"]
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Setup Conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          channels: conda-forge
+          channel-priority: true
+          auto-activate-base: false
+          allow-softlinks: true
+          activate-environment: ''
+
+      - name: Check Conda
+        run: |
+          conda info
+          conda list
+          conda config --show-sources
+          conda config --show
+
+      - name: Install conda-lock
+        run: |
+          conda install conda-lock
+
+      - name: Install conda-devenv
+        run: |
+          conda install "conda-devenv>=3"
+
+      - name: Update locks
+        id: update_locks
+        run: |
+          conda devenv --lock
+
+      - name: Configure Git author (bot)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create the PR pushing the changes
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        if: ${{ success() && steps.update_locks.outcome == 'success' }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-conda-lock-files
+          title: Update conda-lock
+          commit-message: "GHA: update conda-lock files for ${{ matrix.os }}"
+          body: |
+            Update versions of the deps pinned by conda-lock to the latest versions available.
+          reviewers: volpatto  # add the maintainers to be set as reviewers here
