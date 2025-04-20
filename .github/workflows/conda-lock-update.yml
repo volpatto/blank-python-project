@@ -72,9 +72,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-conda-lock-files
           title: Update conda-lock
-          commit-message: "GHA: update conda-lock files for ${{ matrix.os }}"
+          commit-message: "GHA: update conda-lock files"
           body: |
             Update versions of the deps pinned by conda-lock to the latest versions available.
           reviewers: volpatto  # add the maintainers to be set as reviewers here
-          labels: automerge  # the created PR will be merged automatically if everythings
-                             # work fine.
