@@ -51,20 +51,6 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
-      - name: Cache Conda environment
-        uses: actions/cache@v3
-        env:
-          # Increase this value to reset cache if locked env files has not changed
-          CACHE_NUMBER: 0
-        with:
-          path: |
-            ~/.conda/pkgs
-            ~/miniconda3/envs
-            ~/conda_pkgs_dir
-          key: ${{ runner.os }}-conda-${{ hashFiles('**/*.conda-lock.yml') }}-${{ env.PY }}
-          restore-keys: |
-            ${{ runner.os }}-conda-${{ env.PY }}-
-
       - name: Setup Conda
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -73,7 +59,6 @@ jobs:
           auto-activate-base: false
           allow-softlinks: true
           activate-environment: ''
-          use-only-tar-bz2: true
 
       - name: Check Conda
         run: |
