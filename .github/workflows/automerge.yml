@@ -20,10 +20,10 @@ jobs:
 
       - name: Wait for all status checks to pass
         uses: pascalgn/automerge-action@v0.15.4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          merge_method: squash
-          # This will wait for all checks to pass before proceeding
+        env:
+            GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+            MERGE_METHOD: "squash"
+            MERGE_REQUIRED_APPROVALS: "0"  # add the minimal number of reviewers here
 
       - name: Automerge PR
         if: success() # Only merge if all checks pass
