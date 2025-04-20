@@ -7,12 +7,13 @@ plugins:
   - mkdocstrings:
       handlers:
             python:
+              paths: [src]
               options:
                 docstring_style: sphinx
 
 # Define the navigation bar
 nav:
-  - Introduction: index.md
+  - Home: index.md
   - API Reference: reference.md
 
 repo_url: https://github.com/volpatto/blank-python-project

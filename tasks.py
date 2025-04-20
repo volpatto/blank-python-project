@@ -192,30 +192,57 @@ def run_hooks(ctx, all_files=False, verbose=False, files="", from_ref="", to_ref
 
 
 @task
-def install_deps(ctx):
-    """
-    Install the dependencies required to the development. Warning: use when developing with virtualenv only.
-    """
-    task_output_message = "Installing the dependencies in the active environment"
-    _task_screen_log(task_output_message)
-    base_command = "pip install -r requirements.txt"
-    host_system = _HOST_SYSTEM
-    if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
-    pty_flag = True if host_system != "Windows" else False
-    ctx.run(base_command, pty=pty_flag, echo=True)
-
-
-@task(
-    pre=[install_deps],
-)
 def dev_install(ctx):
     """
     Install the package in the environment. Warning: use when developing with virtualenv only.
     """
     task_output_message = "Installing the package in the active environment"
     _task_screen_log(task_output_message)
-    base_command = "pip install -e ."
+    base_command = 'pip install -e ".[dev]"'
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag)
+
+
+@task
+def docs_install(ctx):
+    """
+    Install the docs dependencies in the venv. Warning: use when developing with virtualenv only.
+    """
+    task_output_message = "Installing the docs dependencies in the active environment"
+    _task_screen_log(task_output_message)
+    base_command = 'pip install -e ".[docs]"'
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag)
+
+
+@task(pre=[docs_install])
+def build_docs(ctx, verbose=False, clean=True, quiet=False):
+    """
+    Builds the docs file to be deployed.
+
+    Warning: use when developing with virtualenv only.
+    """
+    task_output_message = "Building the docs file"
+    _task_screen_log(task_output_message)
+    base_command = "mkdocs build"
+
+    if clean:
+        base_command += " --clean"
+    else:
+        base_command += " --dirty"
+
+    if verbose:
+        base_command += " --verbose"
+
+    if quiet:
+        base_command += " --quiet"
+
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
         raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
@@ -238,7 +265,7 @@ def deploy_docs_local(ctx):
     ctx.run(base_command, pty=pty_flag, echo=True)
 
 
-@task
+@task(pre=[docs_install])
 def deploy_docs_gh(ctx):
     """
     Deploy MkDocs pages to Github.
