@@ -18,6 +18,8 @@ on:
     branches: [ "main" ]
   schedule:
     - cron: '0 4 * * 1'
+  # This workflow can also be trigged on demand
+  workflow_dispatch:
 
 jobs:
   analyze:
