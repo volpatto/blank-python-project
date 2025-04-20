@@ -23,7 +23,9 @@ This repo provides a scratch of a Python project. Its purpose is to serve as sta
     - end-of-file-fixer
     - ruff
     - blacken-docs
-* A free Coverage reporter using [this Action](https://github.com/py-cov-action/python-coverage-comment-action/tree/main). It comments on PR, annotates where is lacking coverage, and provides coverage badges in a dedicated branch after PRs.
+* A free Coverage reporter using [this Action](https://github.com/py-cov-action/python-coverage-comment-action/tree/main). It comments on PR, annotates where is lacking coverage, and provides coverage badges in a dedicated branch after PRs;
+* A PR automerge jobs for when a PR is ready to go with all reviews, code changes, and checks are done;
+* Use [conda-lock](https://github.com/conda/conda-lock) when working with `conda` envs, assuring fully reproducible envs for Windows, Ubuntu, and MacOS.
 
 ## Contributions
 
