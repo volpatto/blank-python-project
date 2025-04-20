@@ -1,0 +1,39 @@
+name: Automerge PR
+
+on:
+  pull_request:
+    types: [labeled, synchronize, opened]
+    branches:
+      - main
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    # Only run if the PR has the "automerge" label
+    if: contains(github.event.pull_request.labels.*.name, 'automerge')
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensure we fetch all commits, not just the latest
+
+      - name: Wait for all status checks to pass
+        uses: pascalgn/automerge-action@v0.15.4
+        env:
+            GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+            MERGE_METHOD: "squash"
+            MERGE_REQUIRED_APPROVALS: "0"  # add the minimal number of reviewers here
+            MERGE_RETRY_SLEEP: "60000"  # time to wait to merge in miliseconds (current: 1 min)
+            MERGE_RETRIES: "10"  # The number of retries between each MERGE_RETRY_SLEEP.
+                                 # Current: after each minute (since MERGE_RETRY_SLEEP: "60000"),
+                                 # the job will check the PR and see if it is ready to go with
+                                 # all checks passing. With the current settings, this step will
+                                 # wait a total of 10 minutes.
+
+      - name: Automerge PR
+        if: success() # Only merge if all checks pass
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --squash --delete-branch --auto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
