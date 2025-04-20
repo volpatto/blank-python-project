@@ -222,6 +222,35 @@ def docs_install(ctx):
 
 
 @task(pre=[docs_install])
+def build_docs(ctx, verbose=False, clean=True, quiet=False):
+    """
+    Builds the docs file to be deployed.
+
+    Warning: use when developing with virtualenv only.
+    """
+    task_output_message = "Building the docs file"
+    _task_screen_log(task_output_message)
+    base_command = "mkdocs build"
+
+    if clean:
+        base_command += " --clean"
+    else:
+        base_command += " --dirty"
+
+    if verbose:
+        base_command += " --verbose"
+
+    if quiet:
+        base_command += " --quiet"
+
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag)
+
+
+@task
 def deploy_docs_local(ctx):
     """
     Deploy MkDocs pages locally.
