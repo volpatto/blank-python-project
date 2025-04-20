@@ -5,6 +5,7 @@
 [![Tests using venv](https://github.com/volpatto/blank-python-project/actions/workflows/tests-venv.yml/badge.svg)](https://github.com/volpatto/blank-python-project/actions/workflows/tests-venv.yml)
 [![Coverage badge](https://raw.githubusercontent.com/volpatto/blank-python-project/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/volpatto/blank-python-project/blob/python-coverage-comment-action-data/htmlcov/index.html)
 [![Publish docs via GitHub Pages](https://github.com/volpatto/blank-python-project/actions/workflows/publish-docs.yml/badge.svg)](https://github.com/volpatto/blank-python-project/actions/workflows/publish-docs.yml)
+[![CodeQL Analyzes](https://github.com/volpatto/blank-python-project/actions/workflows/codeql.yml/badge.svg)](https://github.com/volpatto/blank-python-project/actions/workflows/codeql.yml)
 
 This repo provides a scratch of a Python project. Its purpose is to serve as starting point for the development of a Python project based on a minimal working structure.
 
@@ -25,7 +26,8 @@ This repo provides a scratch of a Python project. Its purpose is to serve as sta
     - blacken-docs
 * A free Coverage reporter using [this Action](https://github.com/py-cov-action/python-coverage-comment-action/tree/main). It comments on PR, annotates where is lacking coverage, and provides coverage badges in a dedicated branch after PRs;
 * A PR automerge jobs for when a PR is ready to go with all reviews, code changes, and checks are done;
-* Use [conda-lock](https://github.com/conda/conda-lock) when working with `conda` envs, assuring fully reproducible envs for Windows, Ubuntu, and MacOS.
+* Use [conda-lock](https://github.com/conda/conda-lock) when working with `conda` envs, assuring fully reproducible envs for Windows, Ubuntu, and MacOS;
+* Run [CodeQL](https://github.com/github/codeql) to analyze the code and report security issuues.
 
 ## Contributions
 
