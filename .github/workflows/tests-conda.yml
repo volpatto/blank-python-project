@@ -23,7 +23,8 @@ jobs:
     name: ${{ matrix.os }} -- Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     env:
-      IS_ENV_LOCKED: false  # set as 'true' if using conda-lock
+      IS_ENV_LOCKED: true  # set as 'true' if using conda-lock
+      PY: ${{ matrix.python-version }}
     permissions:
       # Gives the action the necessary permissions for publishing new
       # comments in pull requests. Required for Coverage reports.
