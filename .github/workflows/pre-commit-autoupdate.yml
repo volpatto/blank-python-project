@@ -14,13 +14,38 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - name: Configure Git author (bot)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - uses: browniebroke/pre-commit-autoupdate-action@deb83bfe0036e1116ee4e241d6220274d69b1f9e
+      - name: Set up Python
+        uses: actions/setup-python@v5
 
-      - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Create temp .venv
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+
+      - name: Install dependencies in dev mode
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Update pre-commit
+        run: |
+          pre-commit autoupdate
+
+      - name: Create the PR pushing the changes
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         if: always()
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
