@@ -2,8 +2,13 @@ name: blank-project
 channels:
   - conda-forge
 
+platforms:
+  - win-64
+  - linux-64
+  - osx-64
+
 dependencies:
-  # Python stack
+  # Core
   - python={{ get_env("PY", default="3.11") }}
   - ruff
   - numpy>=1.13.3
@@ -12,6 +17,7 @@ dependencies:
   - mypy
   - invoke
   - rich
+  - conda-lock
 
   # For tests
   - pytest>=3.8.0
