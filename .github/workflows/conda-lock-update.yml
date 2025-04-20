@@ -12,16 +12,12 @@ concurrency:
 
 jobs:
   update-locks:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     env:
       PY: "3.11"  # set the python version to be used as a base
     permissions:
       contents: write
       pull-requests: write
-    strategy:
-      fail-fast: false
-      matrix:
-        os: ["windows-latest", "ubuntu-latest", "macos-13"]
 
     steps:
       - name: Checkout full history
