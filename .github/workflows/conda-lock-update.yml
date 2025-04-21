@@ -60,11 +60,6 @@ jobs:
         run: |
           conda devenv --lock
 
-      - name: Configure Git author (bot)
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Create the PR pushing the changes
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         if: ${{ success() && steps.update_locks.outcome == 'success' }}
