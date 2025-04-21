@@ -19,11 +19,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git author (bot)
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Set up Python
         uses: actions/setup-python@v5
 
@@ -48,14 +43,11 @@ jobs:
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         if: always()
         with:
-          token: ${{ secrets.BOT_PAT }}  # this token should be created in your repository.
-                                         # It allows the workflows triggers in a PR created
-                                         # by a "bot user".
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-pre-commit-hooks
           title: Update pre-commit hooks
           commit-message: "GHA: update pre-commit hooks"
           body: Update versions of pre-commit hooks to latest version.
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
-          labels: automerge
           reviewers: volpatto  # add the maintainers to be set as reviewers here
