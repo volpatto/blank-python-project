@@ -77,4 +77,7 @@ jobs:
           commit-message: "GHA: update conda-lock files"
           body: |
             Update versions of the deps pinned by conda-lock to the latest versions available.
+          committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          labels: automerge
           reviewers: volpatto  # add the maintainers to be set as reviewers here
