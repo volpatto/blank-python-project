@@ -69,9 +69,7 @@ jobs:
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         if: ${{ success() && steps.update_locks.outcome == 'success' }}
         with:
-          token: ${{ secrets.BOT_PAT }}  # this token should be created in your repository.
-                                         # It allows the workflows triggers in a PR created
-                                         # by a "bot user".
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-conda-lock-files
           title: Update conda-lock
           commit-message: "GHA: update conda-lock files"
@@ -79,5 +77,4 @@ jobs:
             Update versions of the deps pinned by conda-lock to the latest versions available.
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
-          labels: automerge
           reviewers: volpatto  # add the maintainers to be set as reviewers here
