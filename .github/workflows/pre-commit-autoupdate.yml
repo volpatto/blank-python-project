@@ -48,7 +48,9 @@ jobs:
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         if: always()
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.BOT_PAT }}  # this token should be created in your repository.
+                                         # It allows the workflows triggers in a PR created
+                                         # by a "bot user".
           branch: update-pre-commit-hooks
           title: Update pre-commit hooks
           commit-message: "GHA: update pre-commit hooks"
