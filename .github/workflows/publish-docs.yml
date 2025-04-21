@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+  # This workflow can also be triggered on demand
+  workflow_dispatch:
 
 jobs:
   build:

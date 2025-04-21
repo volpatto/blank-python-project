@@ -3,7 +3,7 @@ name: Update conda-lock
 on:
   schedule:
     - cron: "0 3 * * 1"  # runs at 03:00 UTC on Mondays
-  # This workflow can also be trigged on demand
+  # This workflow can also be triggered on demand
   workflow_dispatch:
 
 concurrency:
