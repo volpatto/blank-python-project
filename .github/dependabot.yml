@@ -11,6 +11,10 @@ updates:
       # Check for updates to GitHub Actions every week
       interval: "weekly"
 
+    # list here the users to be added as reviewers in dependabot PRs
+    reviewers:
+      - "volpatto"
+
     # Since we have a lot of workflows, it is better to save time and PRs
     # and gather them into a single PR.
     # Based on here: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/optimizing-pr-creation-version-updates#prioritizing-meaningful-updates

@@ -3,7 +3,8 @@ name: Checks and Linters
 on:
 
   pull_request:
-    types: ["opened", "synchronize", "reopened", "labeled", "unlabeled"]
+    types: [ "opened", "synchronize", "reopened", "labeled", "unlabeled" ]
+    branches: [ "main" ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
