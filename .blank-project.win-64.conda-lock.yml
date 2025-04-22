@@ -143,11 +143,12 @@ package:
   version: 2025.1.31
   manager: conda
   platform: win-64
-  dependencies: {}
-  url: https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2025.1.31-h56e8100_0.conda
+  dependencies:
+    __win: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2025.1.31-h4c7d964_1.conda
   hash:
-    md5: 5304a31607974dfc2110dfbb662ed092
-    sha256: 1bedccdf25a3bd782d6b0e57ddd97cdcda5501716009f2de4479a779221df155
+    md5: fb8af741d752521fb48b8d116c9b044e
+    sha256: d6326613de7aea644f4c3b5fadd87d7b19714fe2ba31c9e2d2cdd65830f95cd4
   category: main
   optional: false
 - name: cachecontrol
@@ -1161,11 +1162,11 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: '>=3.8'
-  url: https://conda.anaconda.org/conda-forge/noarch/packaging-25.0-pyhd8ed1ab_0.conda
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/packaging-25.0-pyh29332c3_1.conda
   hash:
-    md5: 4088c0d078e2f5092ddf824495186229
-    sha256: f759df4f492ae481505dcceb3d4485a120ee798af26711c92de20944a1185621
+    md5: 58335b26c38bf4a20f399384c33cbcf9
+    sha256: 289861ed0c13a15d7bbb408796af4de72c2fe67e2bcb0de98f4c3fce259d7991
   category: main
   optional: false
 - name: paginate
@@ -1489,10 +1490,10 @@ package:
   manager: conda
   platform: win-64
   dependencies: {}
-  url: https://conda.anaconda.org/conda-forge/win-64/python_abi-3.11-6_cp311.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.11-7_cp311.conda
   hash:
-    md5: 0cdb3079c532b4d216bc9efacd510138
-    sha256: 82b09808cc4f80212be7539d542d5853e0aaa593bc715f02b831c0ea0552b8bf
+    md5: 6320dac78b3b215ceac35858b2cfdb70
+    sha256: 705d06b15c497b585d235e7e87f6c893ffe5fbfdb3326e376e56c842879e0a09
   category: main
   optional: false
 - name: pytz
@@ -1676,15 +1677,15 @@ package:
   category: main
   optional: false
 - name: setuptools
-  version: 78.1.1
+  version: 79.0.0
   manager: conda
   platform: win-64
   dependencies:
     python: '>=3.9'
-  url: https://conda.anaconda.org/conda-forge/noarch/setuptools-78.1.1-pyhff2d567_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/setuptools-79.0.0-pyhff2d567_0.conda
   hash:
-    md5: 72437384f9364b6baf20b6dd68d282c2
-    sha256: 33a0cab4724d8130055f65e6edc101df7136f2f26cefb52669df88de8aeee28c
+    md5: 36c8697843eb7573fe3dde0e36193a06
+    sha256: b0415e169a4b39ebe4fbbbb224a45607dcceb77162761dfd8bb94533a6ff9f97
   category: main
   optional: false
 - name: shellingham
