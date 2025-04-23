@@ -98,3 +98,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ github.token }}
           ANNOTATE_MISSING_LINES: true
+          ANNOTATION_TYPE: error
