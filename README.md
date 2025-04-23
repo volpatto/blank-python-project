@@ -11,6 +11,7 @@ This repo provides a scratch of a Python project. Its purpose is to serve as sta
 
 ## Covered features
 
+* A Python package organized following the [src-layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/#src-layout-vs-flat-layout);
 * A preconfigured `pyproject.toml` file following the suggestions from [the Official Python Packaging docs](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/);
 * [GitHub Actions](https://github.com/features/actions) convenient workflows with minimal configurations for latest Ubuntu, macOS and Windows;
 * Tests with [pytest](https://docs.pytest.org/en/latest/);
