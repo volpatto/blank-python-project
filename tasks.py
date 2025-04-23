@@ -221,7 +221,7 @@ def docs_install(ctx):
     ctx.run(base_command, pty=pty_flag)
 
 
-@task(pre=[docs_install])
+@task
 def build_docs(ctx, verbose=False, clean=True, quiet=False):
     """
     Builds the docs file to be deployed.
