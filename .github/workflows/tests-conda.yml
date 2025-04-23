@@ -100,6 +100,7 @@ jobs:
           ANNOTATE_MISSING_LINES: true
           ANNOTATION_TYPE: error
 
-      - name: Check if diff code has 100% of coverage
+      - name: Check if diff code has 100% of coverage (Unix)
+        shell: ${{ matrix.os == 'windows-latest' && 'pwsh' || 'bash -el {0}' }}
         run: |
-          diff-cover coverage.xml --fail-under=100
+          inv diff-coverage

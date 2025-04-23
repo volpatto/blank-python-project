@@ -80,4 +80,4 @@ jobs:
 
       - name: Check if diff code has 100% of coverage
         run: |
-          diff-cover coverage.xml --fail-under=100
+          inv diff-coverage

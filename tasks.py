@@ -101,6 +101,24 @@ def tests(
     ctx.run(base_command, pty=pty_flag)
 
 
+@task
+def diff_coverage(ctx):
+    """
+    Run diff_cover to verify if all new code is covered. Needs a coverage.xml file.
+    """
+    task_output_message = "Check if diff code is covered"
+    _task_screen_log(task_output_message)
+
+    base_command = "diff-cover coverage.xml --config-file pyproject.toml"
+    _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
+
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag)
+
+
 @task(
     help={
         "color": "Display output with colors",

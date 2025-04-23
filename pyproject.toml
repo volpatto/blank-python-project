@@ -65,3 +65,7 @@ minversion = "6.0"
 testpaths = [
     "src/mypackage",
 ]
+
+[tool.diff_cover]
+compare_branch = "origin/main"
+fail_under=100
