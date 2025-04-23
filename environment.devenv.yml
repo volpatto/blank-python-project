@@ -19,6 +19,10 @@ dependencies:
   - rich
   - conda-lock
 
+  # Notebooks
+  - notebook
+  - jupyter
+
   # For tests
   - pytest>=3.8.0
   - pytest-cov

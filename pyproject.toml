@@ -40,6 +40,8 @@ dev = [
   "mypy",
   "invoke",
   "rich",
+  "notebook",
+  "jupyter",
 ]
 docs = [
   "mkdocs",
