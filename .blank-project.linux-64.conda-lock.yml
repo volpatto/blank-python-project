@@ -13,7 +13,7 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: e390016e929ea0a22188e415afa3127ea09e04ebf684127f7be1d7a938426e3b
+    linux-64: b976fea20d35ee8f70aa30970bc481902288531880a3327427aad36e5edc6fe5
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -404,6 +404,18 @@ package:
     sha256: d5696636733b3c301054b948cdd793f118efacce361d9bd4afb57d5980a9064f
   category: main
   optional: false
+- name: chardet
+  version: 5.2.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: '>=3.9'
+  url: https://conda.anaconda.org/conda-forge/noarch/chardet-5.2.0-pyhd8ed1ab_3.conda
+  hash:
+    md5: 56bfd153e523d9b9d05e4cf3c1cfe01c
+    sha256: cfca3959d2bec9fcfec98350ecdd88b71dac6220d1002c257d65b40f6fbba87c
+  category: main
+  optional: false
 - name: charset-normalizer
   version: 3.4.1
   manager: conda
@@ -612,6 +624,22 @@ package:
   hash:
     md5: 961b3a227b437d82ad7054484cfa71b2
     sha256: 9717a059677553562a8f38ff07f3b9f61727bd614f505658b0a5ecbcf8df89be
+  category: main
+  optional: false
+- name: diff-cover
+  version: 9.2.4
+  manager: conda
+  platform: linux-64
+  dependencies:
+    chardet: '>=3.0.0'
+    jinja2: '>=2.7.1'
+    pluggy: '>=0.13.1,<2'
+    pygments: '>=2.9.0'
+    python: '>=3.9'
+  url: https://conda.anaconda.org/conda-forge/noarch/diff-cover-9.2.4-pyhd8ed1ab_0.conda
+  hash:
+    md5: 55e89a10298b22526247cb053f3e0b15
+    sha256: 49faa4f0eabc76743bcf808ff58960249dcccaf0e5774d57fbbec0bed9382ea3
   category: main
   optional: false
 - name: distlib

@@ -42,6 +42,7 @@ dev = [
   "rich",
   "notebook",
   "jupyter",
+  "diff_cover",
 ]
 docs = [
   "mkdocs",
