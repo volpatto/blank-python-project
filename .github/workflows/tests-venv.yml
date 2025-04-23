@@ -69,7 +69,7 @@ jobs:
       - name: Run tests with pytest
         run: |
           inv tests -n 2 --generate-cov-xml --check-coverage
-          inv tests-ipynb --generate-cov-xml --check-coverage
+          inv tests-ipynb --generate-cov-xml --check-coverage --cov-append
 
       - name: Upload Coverage PR comment
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' }}
