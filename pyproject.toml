@@ -68,6 +68,9 @@ testpaths = [
     "src/mypackage",
     "notebooks/supported"
 ]
+filterwarnings = [
+  "ignore::coverage.exceptions.CoverageWarning",
+]
 
 [tool.diff_cover]
 compare_branch = "origin/main"

@@ -22,6 +22,72 @@ def _task_screen_log(message: str, bold: bool = True, color: str = "blue") -> No
 
 @task(
     help={
+        "verbose": "Run pytest in verbose mode",
+        "color": "Colorize pytest output",
+        "check_coverage": "Display coverage summary table after running the tests",
+        "generate_report": "Generate pytest report and save it as a xml file (named pytest.xml)",
+        "generate_cov_xml": "Generate coverage report and save it as a xml file (named coverage.xml)",
+        "cov_append": "Append coverage output to existing coverage file",
+    },
+)
+def tests_ipynb(
+    ctx,
+    verbose=True,
+    color=True,
+    check_coverage=False,
+    generate_cov_xml=False,
+    generate_report=False,
+    cov_append=False,
+):
+    """
+    Run notebooks as regression tests for each cell.
+    """
+    task_output_message = "Running notebooks as tests"
+    _task_screen_log(task_output_message)
+
+    base_command = "pytest -ra -q --nbval notebooks/supported"
+
+    if verbose:
+        base_command += " -v"
+
+    if color:
+        base_command += " --color=yes"
+
+    check_coverage_msg = ""
+    if check_coverage:
+        check_coverage_msg += "--cov=mypackage"
+        base_command += f" {check_coverage_msg}"
+
+    generate_report_cmd = ""
+    if generate_report:
+        generate_report_cmd = "--junitxml=pytest.xml"
+        if check_coverage:
+            base_command += f" {generate_report_cmd}"
+        else:
+            base_command += f" --cov=mypackage {generate_report_cmd}"
+
+    generate_cov_xml_cmd = ""
+    if generate_cov_xml:
+        generate_cov_xml_cmd = "--cov-report xml:coverage.xml"
+        base_command += f" {generate_cov_xml_cmd}"
+
+    if generate_report or generate_cov_xml:
+        base_command += " --cov-report=term-missing:skip-covered"
+
+    if cov_append:
+        base_command += " --cov-append"
+
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+
+    _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag)
+
+
+@task(
+    help={
         "numprocess": "Num of processes to run pytest in parallel",
         "verbose": "Run pytest in verbose mode",
         "color": "Colorize pytest output",
@@ -41,6 +107,7 @@ def tests(
     generate_cov_xml=False,
     generate_report=False,
     record_output=False,
+    # ipynb=True,
 ):
     """
     Run tests with pytest.
@@ -89,16 +156,23 @@ def tests(
     if generate_report or generate_cov_xml:
         base_command += " --cov-report=term-missing:skip-covered"
 
-    host_system = _HOST_SYSTEM
     if record_output:
-        if host_system not in _SUPPORTED_SYSTEMS:
-            raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
-
         base_command += " | tee pytest-coverage.txt"
+
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
 
     _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
+
+    # if ipynb:
+    #     ipynb_tests_cmd = "pytest --color=yes --nbval notebooks/supported --cov=mypackage"
+    #     ipynb_tests_cmd += " --cov-report xml:coverage.xml --cov-append"
+    #     _task_screen_log(f"\nRunning: {ipynb_tests_cmd}", color="yellow", bold=False)
+    #     pty_flag = True if host_system != "Windows" else False
+    #     ctx.run(ipynb_tests_cmd, pty=pty_flag)
 
 
 @task
