@@ -10,6 +10,7 @@ _SUPPORTED_SYSTEMS = (
     "Linux",
     "Darwin",
 )
+_PACKAGE_NAME = "mypackage"
 
 
 def _task_screen_log(message: str, bold: bool = True, color: str = "blue") -> None:
@@ -55,7 +56,7 @@ def tests_ipynb(
 
     check_coverage_msg = ""
     if check_coverage:
-        check_coverage_msg += "--cov=mypackage"
+        check_coverage_msg += f"--cov={_PACKAGE_NAME}"
         base_command += f" {check_coverage_msg}"
 
     generate_report_cmd = ""
@@ -64,7 +65,7 @@ def tests_ipynb(
         if check_coverage:
             base_command += f" {generate_report_cmd}"
         else:
-            base_command += f" --cov=mypackage {generate_report_cmd}"
+            base_command += f" --cov={_PACKAGE_NAME} {generate_report_cmd}"
 
     generate_cov_xml_cmd = ""
     if generate_cov_xml:
@@ -79,7 +80,7 @@ def tests_ipynb(
 
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
 
     _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
     pty_flag = True if host_system != "Windows" else False
@@ -137,7 +138,7 @@ def tests(
 
     check_coverage_msg = ""
     if check_coverage:
-        check_coverage_msg += "--cov=mypackage"
+        check_coverage_msg += f"--cov={_PACKAGE_NAME}"
         base_command += f" {check_coverage_msg}"
 
     generate_report_cmd = ""
@@ -146,7 +147,7 @@ def tests(
         if check_coverage:
             base_command += f" {generate_report_cmd}"
         else:
-            base_command += f" --cov=mypackage {generate_report_cmd}"
+            base_command += f" --cov={_PACKAGE_NAME} {generate_report_cmd}"
 
     generate_cov_xml_cmd = ""
     if generate_cov_xml:
@@ -161,18 +162,11 @@ def tests(
 
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
 
     _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
-
-    # if ipynb:
-    #     ipynb_tests_cmd = "pytest --color=yes --nbval notebooks/supported --cov=mypackage"
-    #     ipynb_tests_cmd += " --cov-report xml:coverage.xml --cov-append"
-    #     _task_screen_log(f"\nRunning: {ipynb_tests_cmd}", color="yellow", bold=False)
-    #     pty_flag = True if host_system != "Windows" else False
-    #     ctx.run(ipynb_tests_cmd, pty=pty_flag)
 
 
 @task
@@ -188,7 +182,7 @@ def diff_coverage(ctx):
 
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -205,7 +199,7 @@ def type_check(ctx, pretty=False, verbose=False, color=True, files=""):
     """
     Run mypy on mypackage to check for typing issues.
     """
-    task_output_message = "Running typing check on mypackage"
+    task_output_message = f"Running typing check on {_PACKAGE_NAME}"
     _task_screen_log(task_output_message)
 
     base_command = "mypy"
@@ -225,7 +219,7 @@ def type_check(ctx, pretty=False, verbose=False, color=True, files=""):
 
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -281,7 +275,7 @@ def run_hooks(ctx, all_files=False, verbose=False, files="", from_ref="", to_ref
     _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -296,7 +290,7 @@ def dev_install(ctx):
     base_command = 'pip install -e ".[dev]"'
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -311,7 +305,7 @@ def docs_install(ctx):
     base_command = 'pip install -e ".[docs]"'
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -340,7 +334,7 @@ def build_docs(ctx, verbose=False, clean=True, quiet=False):
 
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -355,7 +349,7 @@ def deploy_docs_local(ctx):
     base_command = "mkdocs serve"
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag, echo=True)
 
@@ -370,6 +364,6 @@ def deploy_docs_gh(ctx):
     base_command = "mkdocs gh-deploy"
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag, echo=True)
