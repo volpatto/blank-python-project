@@ -31,6 +31,8 @@ repos:
   rev: 4.0.1
   hooks:
     - id: nb-clean
+      # Only runs on notebooks/supported ipynb files
+      files: ^notebooks/supported/.*\.ipynb$
       args:
         - --remove-empty-cells
         - --preserve-cell-outputs
