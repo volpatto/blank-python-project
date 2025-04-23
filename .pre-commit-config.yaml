@@ -34,6 +34,7 @@ repos:
       args:
         - --remove-empty-cells
         - --preserve-cell-outputs
+        - --preserve-execution-counts
         - --preserve-cell-metadata
         - tags
         - slideshow
