@@ -83,7 +83,7 @@ jobs:
         shell: bash -el {0}
         run: |
           conda activate blank-project
-          inv tests -n 2 --check-coverage
+          inv tests -n 2 --generate-cov-xml --check-coverage
 
       - name: Build and Test on Windows
         if: matrix.os == 'windows-latest'
@@ -99,3 +99,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           ANNOTATE_MISSING_LINES: true
           ANNOTATION_TYPE: error
+
+      - name: Check if diff code has 100% of coverage
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' }}
+        run: |
+          diff-cover coverage.xml --fail-under=100

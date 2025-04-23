@@ -74,7 +74,7 @@ jobs:
       - name: Test with pytest on Ubuntu/macOS
         if: matrix.os != 'windows-latest'
         run: |
-          inv tests -n 2 --check-coverage
+          inv tests -n 2 --generate-cov-xml --check-coverage
 
       - name: Upload Coverage PR comment
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' }}
@@ -83,3 +83,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           ANNOTATE_MISSING_LINES: true
           ANNOTATION_TYPE: error
+
+      - name: Check if diff code has 100% of coverage
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' }}
+        run: |
+          diff-cover coverage.xml --fail-under=100
