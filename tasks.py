@@ -75,7 +75,7 @@ def tests(
 
     generate_report_cmd = ""
     if generate_report:
-        generate_report_cmd = "--junitxml=pytest.xml --cov-report=term-missing:skip-covered"
+        generate_report_cmd = "--junitxml=pytest.xml"
         if check_coverage:
             base_command += f" {generate_report_cmd}"
         else:
@@ -85,6 +85,9 @@ def tests(
     if generate_cov_xml:
         generate_cov_xml_cmd = "--cov-report xml:coverage.xml"
         base_command += f" {generate_cov_xml_cmd}"
+
+    if generate_report or generate_cov_xml:
+        base_command += " --cov-report=term-missing:skip-covered"
 
     host_system = _HOST_SYSTEM
     if record_output:
