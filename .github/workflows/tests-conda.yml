@@ -101,6 +101,13 @@ jobs:
           ANNOTATION_TYPE: error
 
       - name: Check if diff code has 100% of coverage (Unix)
-        shell: ${{ matrix.os == 'windows-latest' && 'pwsh' || 'bash -el {0}' }}
+        if: matrix.os != 'windows-latest'
+        shell: bash -el {0}
+        run: |
+          inv diff-coverage
+
+      - name: Check if diff code has 100% of coverage (Win)
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
         run: |
           inv diff-coverage
