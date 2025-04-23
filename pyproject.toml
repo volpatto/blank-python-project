@@ -43,6 +43,7 @@ dev = [
   "notebook",
   "jupyter",
   "diff_cover",
+  "nb-clean",
 ]
 docs = [
   "mkdocs",

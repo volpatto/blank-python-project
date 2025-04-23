@@ -26,3 +26,15 @@ repos:
     rev: 1.19.1
     hooks:
     -   id: blacken-docs
+
+- repo: https://github.com/srstevenson/nb-clean
+  rev: 4.0.1
+  hooks:
+    - id: nb-clean
+      args:
+        - --remove-empty-cells
+        - --preserve-cell-outputs
+        - --preserve-cell-metadata
+        - tags
+        - slideshow
+        - --

@@ -13,7 +13,7 @@
 version: 1
 metadata:
   content_hash:
-    win-64: e82cd52b3590805348f21864f9be42951c864739c896cbda4d7295f074669fbe
+    win-64: 05219eb8fcf96a1a6ad0f9b3c5294c97955cf2ce495fbacf1da19a1b1b3a081e
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -1943,6 +1943,19 @@ package:
   hash:
     md5: 29097e7ea634a45cc5386b95cac6568f
     sha256: 1895f47b7d68581a6facde5cb13ab8c2764c2e53a76bd746f8f98910dc4e08fe
+  category: main
+  optional: false
+- name: nb-clean
+  version: 4.0.1
+  manager: conda
+  platform: win-64
+  dependencies:
+    nbformat: '>=5.9.2,<6.0.0'
+    python: '>=3.9,<4.0'
+  url: https://conda.anaconda.org/conda-forge/noarch/nb-clean-4.0.1-pyhd8ed1ab_1.conda
+  hash:
+    md5: 91a87b217436a97ddd15e5e132bed7b7
+    sha256: 0b559d7aaeb758a0eb7ee6481669453da430754443fe38cd3290d0c4382f49f2
   category: main
   optional: false
 - name: nbclient
