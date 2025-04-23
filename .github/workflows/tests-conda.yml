@@ -106,10 +106,12 @@ jobs:
         if: matrix.os != 'windows-latest'
         shell: bash -el {0}
         run: |
+          conda activate blank-project
           inv diff-coverage
 
       - name: Check if diff code has 100% of coverage (Win)
         if: matrix.os == 'windows-latest'
         shell: pwsh
         run: |
+          conda activate blank-project
           inv diff-coverage
