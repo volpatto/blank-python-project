@@ -66,13 +66,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
 
-      - name: Test with pytest on Windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          inv tests -n 2
-
-      - name: Test with pytest on Ubuntu/macOS
-        if: matrix.os != 'windows-latest'
+      - name: Run tests with pytest
         run: |
           inv tests -n 2 --generate-cov-xml --check-coverage
 
@@ -85,6 +79,5 @@ jobs:
           ANNOTATION_TYPE: error
 
       - name: Check if diff code has 100% of coverage
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12' }}
         run: |
           diff-cover coverage.xml --fail-under=100
