@@ -44,6 +44,7 @@ dev = [
   "jupyter",
   "diff_cover",
   "nb-clean",
+  "nbval"
 ]
 docs = [
   "mkdocs",
@@ -65,6 +66,7 @@ include = ["mypackage*"]
 minversion = "6.0"
 testpaths = [
     "src/mypackage",
+    "notebooks/supported"
 ]
 
 [tool.diff_cover]

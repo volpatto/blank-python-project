@@ -13,7 +13,7 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: 25321b55e1384fdf9d7f037b74b39c4d6c7d872b9c254514e3d8bb97c53f788a
+    linux-64: 6c6271a3063ec4419850c029cb81ec138ad68d5c0963bd6ce1f58e25d4d6e476
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -2220,6 +2220,24 @@ package:
   hash:
     md5: bbe1963f1e47f594070ffe87cdf612ea
     sha256: 7a5bd30a2e7ddd7b85031a5e2e14f290898098dc85bea5b3a5bf147c25122838
+  category: main
+  optional: false
+- name: nbval
+  version: 0.11.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    coverage: ''
+    ipykernel: ''
+    jupyter_client: ''
+    nbformat: ''
+    pytest: '>=7'
+    python: '>=3.7'
+    six: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/nbval-0.11.0-pyhd8ed1ab_1.conda
+  hash:
+    md5: 18a78f29ea3c128f36faf2e91ffd589a
+    sha256: b02b2ae5df9d9520bedb4992e924f422fe7a79c2ac30a6564bc130c605a2620b
   category: main
   optional: false
 - name: ncurses

@@ -30,6 +30,7 @@ dependencies:
   - pytest-xdist
   - coverage
   - diff-cover
+  - nbval
 
   # For documentation
   - mkdocs

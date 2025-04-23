@@ -13,7 +13,7 @@
 version: 1
 metadata:
   content_hash:
-    win-64: 05219eb8fcf96a1a6ad0f9b3c5294c97955cf2ce495fbacf1da19a1b1b3a081e
+    win-64: a81ecd62a897c5c2058069a2939967237dedb3539f30c57548c7e816d3ead773
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -2041,6 +2041,24 @@ package:
   hash:
     md5: bbe1963f1e47f594070ffe87cdf612ea
     sha256: 7a5bd30a2e7ddd7b85031a5e2e14f290898098dc85bea5b3a5bf147c25122838
+  category: main
+  optional: false
+- name: nbval
+  version: 0.11.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    coverage: ''
+    ipykernel: ''
+    jupyter_client: ''
+    nbformat: ''
+    pytest: '>=7'
+    python: '>=3.7'
+    six: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/nbval-0.11.0-pyhd8ed1ab_1.conda
+  hash:
+    md5: 18a78f29ea3c128f36faf2e91ffd589a
+    sha256: b02b2ae5df9d9520bedb4992e924f422fe7a79c2ac30a6564bc130c605a2620b
   category: main
   optional: false
 - name: nest-asyncio
