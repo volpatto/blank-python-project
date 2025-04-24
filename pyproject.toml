@@ -53,6 +53,7 @@ docs = [
   "mkdocstrings-python",
   "mkdocs-jupyter",
   "mkdocs-monorepo-plugin",
+  "mkdocs-autorefs"
 ]
 
 [tool.setuptools]

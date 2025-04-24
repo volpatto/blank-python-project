@@ -46,6 +46,9 @@ plugins:
       include_requirejs: true
       include_source: True
       ignore_h1_titles: True  # Disable this if you want to get page title from h1 header in ipynb
+  - autorefs:
+      resolve_closest: true
+
 
 # Define the navigation bar
 nav:
