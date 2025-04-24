@@ -1,3 +1,5 @@
+import shlex
+import glob
 import shutil
 from invoke import task, exceptions
 from rich import print
@@ -449,3 +451,34 @@ def deploy_docs_gh(ctx):
         raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag, echo=True)
+
+
+@task(
+    help={
+        "src": "Glob pattern(s) or list of .ipynb paths to pair (default: notebooks/*.ipynb)",
+        "dry": "Preview only (no files will be changed)",
+    }
+)
+def pair_ipynbs(ctx, src="notebooks/**/*.ipynb", dry=False):
+    """
+    Pair Jupyter notebooks with Python scripts (percent‐format).
+    """
+    _task_screen_log("Pairing notebooks with Python scripts")
+
+    # Gather files
+    if isinstance(src, str):
+        raw = glob.glob(src, recursive=True)
+    else:
+        raw = list(src)
+    notebooks = [Path(p) for p in raw if Path(p).suffix == ".ipynb"]
+    if not notebooks:
+        raise exceptions.Exit(f"No notebooks found for {src}", 1)
+
+    # Run pairing
+    for nb in notebooks:
+        print(f"{'Would pair:' if dry else 'Pairing:'} {nb}")
+        if not dry:
+            cmd = ["jupytext", "--set-formats", "ipynb,py:percent", str(nb)]
+            ctx.run(" ".join(shlex.quote(x) for x in cmd), pty=(_HOST_SYSTEM != "Windows"))
+
+    print(f"{len(notebooks)} notebook(s) {'would be paired' if dry else 'paired'}.")

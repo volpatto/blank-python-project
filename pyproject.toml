@@ -44,7 +44,8 @@ dev = [
   "jupyter",
   "diff_cover",
   "nb-clean",
-  "nbval"
+  "nbval",
+  "jupytext",
 ]
 docs = [
   "mkdocs",
@@ -76,3 +77,7 @@ filterwarnings = [
 [tool.diff_cover]
 compare_branch = "origin/main"
 fail_under=100
+
+# Pair notebooks with .py
+[tool.jupytext]
+formats = "ipynb,py:percent"

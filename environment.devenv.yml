@@ -23,6 +23,7 @@ dependencies:
   - notebook
   - jupyter
   - nb-clean
+  - jupytext
 
   # For tests
   - pytest>=3.8.0
