@@ -8,20 +8,25 @@ theme:
   name: "material"
   custom_dir: docs/overrides
   icon:
-    repo: octicons/mark-github-24
+    repo: github/mark-github-24
   features:
+    # For more options, see: https://squidfunk.github.io/mkdocs-material/setup/
     - navigation.instant
     - content.code.copy
     - content.code.annotate
     - content.action.view
     - content.action.edit
     - content.tooltips
+    - navigation.footer
     - navigation.indexes
     - navigation.top
     - navigation.sections
-    # - navigation.tabs  # enable to have nav bar at the top
+    - navigation.path
+    - navigation.tabs  # enable to have nav bar at the top
+    - search.highlight
     - search.suggest
     - toc.follow
+    - toc.integrate
   palette:
     - scheme: default
       # Toggle buttom dark mode
@@ -42,6 +47,13 @@ markdown_extensions:
       permalink: true
   - pymdownx.arithmatex:
       generic: true
+    # The extension below is important to add custom icons to the template
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - docs/overrides/.icons
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -74,7 +86,7 @@ plugins:
 # Define the navigation bar
 nav:
   - General:
-    - Home: index.md
+    - Home page: index.md
     - Background: background.md
     - API Reference: reference.md
   - Notebooks:
