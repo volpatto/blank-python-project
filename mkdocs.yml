@@ -4,6 +4,8 @@ site_url: https://volpatto.github.io/blank-python-project/
 site_author: Author's name
 repo_url: https://github.com/volpatto/blank-python-project
 
+edit_uri: edit/main/docs/
+
 theme:
   name: "material"
   custom_dir: docs/overrides
@@ -39,9 +41,6 @@ theme:
         icon: material/weather-sunny
         name: Switch to light mode
 
-extra_css:
-  - css/nb-prompts.css  # a trick to hide `In [#]/Out [#]` in ipynb cells
-
 markdown_extensions:
   - toc:
       permalink: true
@@ -55,9 +54,13 @@ markdown_extensions:
         custom_icons:
           - docs/overrides/.icons
 
+extra_css:
+  - css/nb-prompts.css  # a trick to hide `In [#]/Out [#]` in ipynb cells
+
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/content_view.js
 
 plugins:
   - search
