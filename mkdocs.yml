@@ -12,6 +12,13 @@ theme:
   features:
     - navigation.instant
     - content.code.copy
+    - content.action.view
+    - content.action.edit
+    - content.tooltips
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - toc.follow
   palette:
     - scheme: default
       # Toggle buttom dark mode
