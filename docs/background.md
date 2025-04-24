@@ -10,11 +10,11 @@ This package is based on a really heavy math theory that only 4 individuals in t
 
 Predictions are based on this really hard equation:
 
-$$
+\begin{equation}
 f(x) = m\,x + b.
-$$
+\end{equation}
 
-For this pretty hard problem, in our context, frequently $m \gt 0$.
+For this pretty hard problem, in our context, frequently $m \gt 0$ and $b \ne 0$.
 
 ## Recomendations
 
