@@ -77,7 +77,3 @@ filterwarnings = [
 [tool.diff_cover]
 compare_branch = "origin/main"
 fail_under=100
-
-# Pair notebooks with .py
-[tool.jupytext]
-formats = "ipynb,py:percent"

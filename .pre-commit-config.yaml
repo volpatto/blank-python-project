@@ -39,3 +39,11 @@ repos:
         - tags
         - slideshow
         - --
+
+- repo: https://github.com/mwouts/jupytext
+  rev: v1.17.0
+  hooks:
+    - id: jupytext
+      # Only runs on notebooks/supported ipynb files
+      files: '^notebooks/supported/.*\.ipynb$'
+      args: ['--sync']
