@@ -59,6 +59,7 @@ plugins:
 # Define the navigation bar
 nav:
   - Home: index.md
+  - Background: background.md
   - API Reference: reference.md
   - Notebooks:
     - Overview: notebooks.md
