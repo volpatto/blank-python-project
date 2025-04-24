@@ -1,7 +1,10 @@
+import shutil
 from invoke import task, exceptions
 from rich import print
 
 import platform
+
+from pathlib import Path
 
 
 _HOST_SYSTEM = platform.system()
@@ -310,8 +313,64 @@ def docs_install(ctx):
     ctx.run(base_command, pty=pty_flag)
 
 
-@task
-def build_docs(ctx, verbose=False, clean=True, quiet=False):
+@task(
+    help={
+        "dry": "Show what would be removed without actually deleting",
+    }
+)
+def clean(ctx, dry=False):
+    """
+    Remove build/config dirs:
+      - mypackage.egg-info
+      - dist
+      - build
+      - *_cache
+      - site
+    """
+    patterns = [
+        "*.egg-info",
+        "dist",
+        "build",
+        "*_cache",
+        "site",
+    ]
+
+    # Collect all matching dirs
+    exclude_root = ".venv"  # we need to skip changes in .venv
+    to_remove = []
+    for pat in patterns:
+        for d in Path(".").rglob(pat):
+            if not d.is_dir():
+                continue
+            # skip .venv
+            if exclude_root in d.parts:
+                continue
+            to_remove.append(d)
+
+    if not to_remove:
+        _task_screen_log("Nothing to clean.", color="yellow")
+        return
+
+    for d in to_remove:
+        _task_screen_log(f"{'Would remove:' if dry else 'Removing:  '}{d}", color="yellow")
+        if not dry:
+            shutil.rmtree(d)
+
+    _task_screen_log(
+        f"\n{len(to_remove)} director{'y' if len(to_remove) == 1 else 'ies'} {'would be removed' if dry else 'removed'}.",
+        color="yellow",
+    )
+
+
+@task(
+    help={
+        "verbose": "Build docs with verbose mode",
+        "clean": "Clean build of the docs, rebuilding the files",
+        "quiet": "Silence warnings",
+        "include-ipynb": "Collect and add supported notebooks as docs",
+    }
+)
+def build_docs(ctx, verbose=False, clean=True, quiet=False, include_ipynb=True):
     """
     Builds the docs file to be deployed.
 
@@ -331,6 +390,29 @@ def build_docs(ctx, verbose=False, clean=True, quiet=False):
 
     if quiet:
         base_command += " --quiet"
+
+    # We need to move or create symlinks to ipynbs files, moving them to
+    # docs, otherwise mkdocs will be unable to reach them
+    if include_ipynb:
+        ipynbs_path = Path("notebooks/supported")
+        target_ipynbs_dir = Path("docs/notebooks")
+
+        if not ipynbs_path.exists():
+            raise exceptions.Exit(f"Notebook source not found: {ipynbs_path}", 1)
+
+        # Ensure parent exists
+        target_ipynbs_dir.parent.mkdir(parents=True, exist_ok=True)
+
+        # Blow away any old copy
+        if target_ipynbs_dir.exists():
+            shutil.rmtree(target_ipynbs_dir)
+
+        # Copy everything under notebooks/supported → docs/notebooks
+        shutil.copytree(ipynbs_path, target_ipynbs_dir)
+
+        _task_screen_log(
+            f"Included notebooks from {ipynbs_path} → {target_ipynbs_dir}", color="yellow"
+        )
 
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
