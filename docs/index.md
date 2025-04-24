@@ -5,3 +5,4 @@ This is the documentation of `mypackage` generated using [mkdocs.org](https://ww
 ## Sections
 
 1. [API References](reference.md)
+2. [Notebooks][notebooks]
