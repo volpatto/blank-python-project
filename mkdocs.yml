@@ -1,9 +1,32 @@
 site_name: mypackage's Docs
+site_description: A simple MkDocs demonstration
+site_url: https://volpatto.github.io/blank-python-project/
+site_author: Author's name
+repo_url: https://github.com/volpatto/blank-python-project
 
 theme:
   name: "material"
+  features:
+    - navigation.instant
+    - content.code.copy
+  palette:
+    - scheme: default
+      # Toggle buttom dark mode
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      # Toggle buttom light mode
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - toc:
+      permalink: true
 
 plugins:
+  - search
   - mkdocstrings:
       handlers:
             python:
@@ -11,9 +34,10 @@ plugins:
               options:
                 docstring_style: sphinx
 
+  - monorepo
+
 # Define the navigation bar
 nav:
   - Home: index.md
   - API Reference: reference.md
-
-repo_url: https://github.com/volpatto/blank-python-project
+  - Notebooks: '!include ./notebooks/mkdocs.yml'
