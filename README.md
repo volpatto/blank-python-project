@@ -5,7 +5,8 @@
 | Name                 |    Stmts |     Miss |   Branch |   BrPart |    Cover |   Missing |
 |--------------------- | -------: | -------: | -------: | -------: | -------: | --------: |
 | src/mypackage/foo.py |        4 |        0 |        0 |        0 |     100% |           |
-|            **TOTAL** |    **4** |    **0** |    **0** |    **0** | **100%** |           |
+| src/mypackage/goo.py |        3 |        0 |        0 |        0 |     100% |           |
+|            **TOTAL** |    **7** |    **0** |    **0** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
