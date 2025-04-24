@@ -6,6 +6,9 @@ repo_url: https://github.com/volpatto/blank-python-project
 
 theme:
   name: "material"
+  custom_dir: docs/overrides
+  icon:
+    repo: octicons/mark-github-24
   features:
     - navigation.instant
     - content.code.copy
@@ -21,23 +24,33 @@ theme:
         icon: material/weather-sunny
         name: Switch to light mode
 
+extra_css:
+  - css/nb-prompts.css  # a trick to hide `In [#]/Out [#]` in ipynb cells
+
 markdown_extensions:
   - toc:
       permalink: true
 
 plugins:
   - search
+  - monorepo
   - mkdocstrings:
       handlers:
             python:
               paths: [src]
               options:
                 docstring_style: sphinx
-
-  - monorepo
+  - mkdocs-jupyter:
+      include: ["**/*.ipynb"]
+      execute: false
+      include_requirejs: true
+      include_source: True
+      ignore_h1_titles: True  # Disable this if you want to get page title from h1 header in ipynb
 
 # Define the navigation bar
 nav:
   - Home: index.md
   - API Reference: reference.md
-  - Notebooks: '!include ./notebooks/mkdocs.yml'
+  - Notebooks:
+    - Overview: notebooks.md
+    - Tutorials: '!include ./notebooks/mkdocs.yml'

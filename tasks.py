@@ -370,7 +370,7 @@ def clean(ctx, dry=False):
         "include-ipynb": "Collect and add supported notebooks as docs",
     }
 )
-def build_docs(ctx, verbose=False, clean=True, quiet=False, include_ipynb=True):
+def build_docs(ctx, verbose=False, clean=True, quiet=False, include_ipynb=False):
     """
     Builds the docs file to be deployed.
 

@@ -1,13 +1,5 @@
-site_name: supported
+site_name: Tutorials
 docs_dir: supported
 
-plugins:
-  - search
-  - mkdocs-jupyter
-  # - mkdocs-jupyter:
-  #     include: ["supported/*.ipynb"]
-  #     execute: false
-  - monorepo
-
 nav:
-  - A Tutorial: fancy_demonstration.ipynb
+  - How to solve a fancy problem: fancy_demonstration.ipynb
