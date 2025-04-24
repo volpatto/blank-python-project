@@ -16,13 +16,34 @@ repos:
   hooks:
     # Run the linter.
     - id: ruff
-      types_or: [ python, pyi ]
       args: [ --fix ]
     # Run the formatter.
     - id: ruff-format
-      types_or: [ python, pyi ]
 
 -   repo: https://github.com/asottile/blacken-docs
     rev: 1.19.1
     hooks:
     -   id: blacken-docs
+
+- repo: https://github.com/srstevenson/nb-clean
+  rev: 4.0.1
+  hooks:
+    - id: nb-clean
+      # Only runs on notebooks/supported ipynb files
+      files: ^notebooks/supported/.*\.ipynb$
+      args:
+        - --remove-empty-cells
+        - --preserve-cell-outputs
+        - --preserve-execution-counts
+        - --preserve-cell-metadata
+        - tags
+        - slideshow
+        - --
+
+- repo: https://github.com/mwouts/jupytext
+  rev: v1.17.0
+  hooks:
+    - id: jupytext
+      # Only runs on notebooks/supported ipynb files
+      files: '^notebooks/supported/.*\.ipynb$'
+      args: ['--sync']

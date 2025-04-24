@@ -19,16 +19,27 @@ dependencies:
   - rich
   - conda-lock
 
+  # Notebooks
+  - notebook
+  - jupyter
+  - nb-clean
+  - jupytext
+
   # For tests
   - pytest>=3.8.0
   - pytest-cov
   - pytest-xdist
   - coverage
+  - diff-cover
+  - nbval
 
   # For documentation
   - mkdocs
   - mkdocs-material
   - mkdocstrings-python
+  - mkdocs-jupyter
+  - mkdocs-monorepo-plugin
+  - mkdocs-autorefs
 
   # Hooks for git
   - pre-commit

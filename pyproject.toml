@@ -40,11 +40,20 @@ dev = [
   "mypy",
   "invoke",
   "rich",
+  "notebook",
+  "jupyter",
+  "diff_cover",
+  "nb-clean",
+  "nbval",
+  "jupytext",
 ]
 docs = [
   "mkdocs",
   "mkdocs-material",
   "mkdocstrings-python",
+  "mkdocs-jupyter",
+  "mkdocs-monorepo-plugin",
+  "mkdocs-autorefs"
 ]
 
 [tool.setuptools]
@@ -60,4 +69,12 @@ include = ["mypackage*"]
 minversion = "6.0"
 testpaths = [
     "src/mypackage",
+    "notebooks/supported"
 ]
+filterwarnings = [
+  "ignore::coverage.exceptions.CoverageWarning",
+]
+
+[tool.diff_cover]
+compare_branch = "origin/main"
+fail_under=100

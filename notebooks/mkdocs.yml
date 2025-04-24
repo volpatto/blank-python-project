@@ -1,0 +1,5 @@
+site_name: Tutorials
+docs_dir: supported
+
+nav:
+  - How to solve a fancy problem: fancy_demonstration.ipynb

@@ -1,19 +1,82 @@
 site_name: mypackage's Docs
+site_description: A simple MkDocs demonstration
+site_url: https://volpatto.github.io/blank-python-project/
+site_author: Author's name
+repo_url: https://github.com/volpatto/blank-python-project
 
 theme:
   name: "material"
+  custom_dir: docs/overrides
+  icon:
+    repo: octicons/mark-github-24
+  features:
+    - navigation.instant
+    - content.code.copy
+    - content.code.annotate
+    - content.action.view
+    - content.action.edit
+    - content.tooltips
+    - navigation.indexes
+    - navigation.top
+    - navigation.sections
+    # - navigation.tabs  # enable to have nav bar at the top
+    - search.suggest
+    - toc.follow
+  palette:
+    - scheme: default
+      # Toggle buttom dark mode
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      # Toggle buttom light mode
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+extra_css:
+  - css/nb-prompts.css  # a trick to hide `In [#]/Out [#]` in ipynb cells
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
+  - search
+  - monorepo
   - mkdocstrings:
       handlers:
             python:
               paths: [src]
               options:
                 docstring_style: sphinx
+                heading_level: 2
+                parameter_headings: false
+                show_root_heading: true
+                show_symbol_type_heading: true
+                show_symbol_type_toc: false
+  - mkdocs-jupyter:
+      include: ["**/*.ipynb"]
+      execute: false
+      include_requirejs: true
+      include_source: True
+      ignore_h1_titles: True  # Disable this if you want to get page title from h1 header in ipynb
+  - autorefs:
+      resolve_closest: true
+
 
 # Define the navigation bar
 nav:
-  - Home: index.md
-  - API Reference: reference.md
-
-repo_url: https://github.com/volpatto/blank-python-project
+  - General:
+    - Home: index.md
+    - Background: background.md
+    - API Reference: reference.md
+  - Notebooks:
+    - Overview: notebooks.md
+    - Tutorials: '!include ./notebooks/mkdocs.yml'

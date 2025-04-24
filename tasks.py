@@ -1,7 +1,12 @@
+import shlex
+import glob
+import shutil
 from invoke import task, exceptions
 from rich import print
 
 import platform
+
+from pathlib import Path
 
 
 _HOST_SYSTEM = platform.system()
@@ -10,6 +15,7 @@ _SUPPORTED_SYSTEMS = (
     "Linux",
     "Darwin",
 )
+_PACKAGE_NAME = "mypackage"
 
 
 def _task_screen_log(message: str, bold: bool = True, color: str = "blue") -> None:
@@ -18,6 +24,72 @@ def _task_screen_log(message: str, bold: bool = True, color: str = "blue") -> No
     """
     rich_delimiters = f"bold {color}" if bold else f"{color}"
     print(f"[{rich_delimiters}]{message}[/{rich_delimiters}]")
+
+
+@task(
+    help={
+        "verbose": "Run pytest in verbose mode",
+        "color": "Colorize pytest output",
+        "check_coverage": "Display coverage summary table after running the tests",
+        "generate_report": "Generate pytest report and save it as a xml file (named pytest.xml)",
+        "generate_cov_xml": "Generate coverage report and save it as a xml file (named coverage.xml)",
+        "cov_append": "Append coverage output to existing coverage file",
+    },
+)
+def tests_ipynb(
+    ctx,
+    verbose=True,
+    color=True,
+    check_coverage=False,
+    generate_cov_xml=False,
+    generate_report=False,
+    cov_append=False,
+):
+    """
+    Run notebooks as regression tests for each cell.
+    """
+    task_output_message = "Running notebooks as tests"
+    _task_screen_log(task_output_message)
+
+    base_command = "pytest -ra -q --nbval notebooks/supported"
+
+    if verbose:
+        base_command += " -v"
+
+    if color:
+        base_command += " --color=yes"
+
+    check_coverage_msg = ""
+    if check_coverage:
+        check_coverage_msg += f"--cov={_PACKAGE_NAME}"
+        base_command += f" {check_coverage_msg}"
+
+    generate_report_cmd = ""
+    if generate_report:
+        generate_report_cmd = "--junitxml=pytest.xml"
+        if check_coverage:
+            base_command += f" {generate_report_cmd}"
+        else:
+            base_command += f" --cov={_PACKAGE_NAME} {generate_report_cmd}"
+
+    generate_cov_xml_cmd = ""
+    if generate_cov_xml:
+        generate_cov_xml_cmd = "--cov-report xml:coverage.xml"
+        base_command += f" {generate_cov_xml_cmd}"
+
+    if generate_report or generate_cov_xml:
+        base_command += " --cov-report=term-missing:skip-covered"
+
+    if cov_append:
+        base_command += " --cov-append"
+
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
+
+    _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag)
 
 
 @task(
@@ -41,6 +113,7 @@ def tests(
     generate_cov_xml=False,
     generate_report=False,
     record_output=False,
+    # ipynb=True,
 ):
     """
     Run tests with pytest.
@@ -70,30 +143,51 @@ def tests(
 
     check_coverage_msg = ""
     if check_coverage:
-        check_coverage_msg += "--cov=mypackage"
+        check_coverage_msg += f"--cov={_PACKAGE_NAME}"
         base_command += f" {check_coverage_msg}"
 
     generate_report_cmd = ""
     if generate_report:
-        generate_report_cmd = "--junitxml=pytest.xml --cov-report=term-missing:skip-covered"
+        generate_report_cmd = "--junitxml=pytest.xml"
         if check_coverage:
             base_command += f" {generate_report_cmd}"
         else:
-            base_command += f" --cov=mypackage {generate_report_cmd}"
+            base_command += f" --cov={_PACKAGE_NAME} {generate_report_cmd}"
 
     generate_cov_xml_cmd = ""
     if generate_cov_xml:
         generate_cov_xml_cmd = "--cov-report xml:coverage.xml"
         base_command += f" {generate_cov_xml_cmd}"
 
-    host_system = _HOST_SYSTEM
-    if record_output:
-        if host_system not in _SUPPORTED_SYSTEMS:
-            raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+    if generate_report or generate_cov_xml:
+        base_command += " --cov-report=term-missing:skip-covered"
 
+    if record_output:
         base_command += " | tee pytest-coverage.txt"
 
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
+
     _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
+    pty_flag = True if host_system != "Windows" else False
+    ctx.run(base_command, pty=pty_flag)
+
+
+@task
+def diff_coverage(ctx):
+    """
+    Run diff_cover to verify if all new code is covered. Needs a coverage.xml file.
+    """
+    task_output_message = "Check if diff code is covered"
+    _task_screen_log(task_output_message)
+
+    base_command = "diff-cover coverage.xml --config-file pyproject.toml"
+    _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
+
+    host_system = _HOST_SYSTEM
+    if host_system not in _SUPPORTED_SYSTEMS:
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -110,7 +204,7 @@ def type_check(ctx, pretty=False, verbose=False, color=True, files=""):
     """
     Run mypy on mypackage to check for typing issues.
     """
-    task_output_message = "Running typing check on mypackage"
+    task_output_message = f"Running typing check on {_PACKAGE_NAME}"
     _task_screen_log(task_output_message)
 
     base_command = "mypy"
@@ -130,7 +224,7 @@ def type_check(ctx, pretty=False, verbose=False, color=True, files=""):
 
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -186,7 +280,7 @@ def run_hooks(ctx, all_files=False, verbose=False, files="", from_ref="", to_ref
     _task_screen_log(f"Running: {base_command}", color="yellow", bold=False)
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -201,7 +295,7 @@ def dev_install(ctx):
     base_command = 'pip install -e ".[dev]"'
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -216,13 +310,69 @@ def docs_install(ctx):
     base_command = 'pip install -e ".[docs]"'
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
 
-@task(pre=[docs_install])
-def build_docs(ctx, verbose=False, clean=True, quiet=False):
+@task(
+    help={
+        "dry": "Show what would be removed without actually deleting",
+    }
+)
+def clean(ctx, dry=False):
+    """
+    Remove build/config dirs:
+      - mypackage.egg-info
+      - dist
+      - build
+      - *_cache
+      - site
+    """
+    patterns = [
+        "*.egg-info",
+        "dist",
+        "build",
+        "*_cache",
+        "site",
+    ]
+
+    # Collect all matching dirs
+    exclude_root = ".venv"  # we need to skip changes in .venv
+    to_remove = []
+    for pat in patterns:
+        for d in Path(".").rglob(pat):
+            if not d.is_dir():
+                continue
+            # skip .venv
+            if exclude_root in d.parts:
+                continue
+            to_remove.append(d)
+
+    if not to_remove:
+        _task_screen_log("Nothing to clean.", color="yellow")
+        return
+
+    for d in to_remove:
+        _task_screen_log(f"{'Would remove:' if dry else 'Removing:  '}{d}", color="yellow")
+        if not dry:
+            shutil.rmtree(d)
+
+    _task_screen_log(
+        f"\n{len(to_remove)} director{'y' if len(to_remove) == 1 else 'ies'} {'would be removed' if dry else 'removed'}.",
+        color="yellow",
+    )
+
+
+@task(
+    help={
+        "verbose": "Build docs with verbose mode",
+        "clean": "Clean build of the docs, rebuilding the files",
+        "quiet": "Silence warnings",
+        "include-ipynb": "Collect and add supported notebooks as docs",
+    }
+)
+def build_docs(ctx, verbose=False, clean=True, quiet=False, include_ipynb=False):
     """
     Builds the docs file to be deployed.
 
@@ -243,9 +393,32 @@ def build_docs(ctx, verbose=False, clean=True, quiet=False):
     if quiet:
         base_command += " --quiet"
 
+    # We need to move or create symlinks to ipynbs files, moving them to
+    # docs, otherwise mkdocs will be unable to reach them
+    if include_ipynb:
+        ipynbs_path = Path("notebooks/supported")
+        target_ipynbs_dir = Path("docs/notebooks")
+
+        if not ipynbs_path.exists():
+            raise exceptions.Exit(f"Notebook source not found: {ipynbs_path}", 1)
+
+        # Ensure parent exists
+        target_ipynbs_dir.parent.mkdir(parents=True, exist_ok=True)
+
+        # Blow away any old copy
+        if target_ipynbs_dir.exists():
+            shutil.rmtree(target_ipynbs_dir)
+
+        # Copy everything under notebooks/supported → docs/notebooks
+        shutil.copytree(ipynbs_path, target_ipynbs_dir)
+
+        _task_screen_log(
+            f"Included notebooks from {ipynbs_path} → {target_ipynbs_dir}", color="yellow"
+        )
+
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag)
 
@@ -260,7 +433,7 @@ def deploy_docs_local(ctx):
     base_command = "mkdocs serve"
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag, echo=True)
 
@@ -275,6 +448,37 @@ def deploy_docs_gh(ctx):
     base_command = "mkdocs gh-deploy"
     host_system = _HOST_SYSTEM
     if host_system not in _SUPPORTED_SYSTEMS:
-        raise exceptions.Exit("mypackage is running on unsupported operating system", code=1)
+        raise exceptions.Exit(f"{_PACKAGE_NAME} is running on unsupported operating system", code=1)
     pty_flag = True if host_system != "Windows" else False
     ctx.run(base_command, pty=pty_flag, echo=True)
+
+
+@task(
+    help={
+        "src": "Glob pattern(s) or list of .ipynb paths to pair (default: notebooks/*.ipynb)",
+        "dry": "Preview only (no files will be changed)",
+    }
+)
+def pair_ipynbs(ctx, src="notebooks/**/*.ipynb", dry=False):
+    """
+    Pair Jupyter notebooks with Python scripts (percent‐format).
+    """
+    _task_screen_log("Pairing notebooks with Python scripts")
+
+    # Gather files
+    if isinstance(src, str):
+        raw = glob.glob(src, recursive=True)
+    else:
+        raw = list(src)
+    notebooks = [Path(p) for p in raw if Path(p).suffix == ".ipynb"]
+    if not notebooks:
+        raise exceptions.Exit(f"No notebooks found for {src}", 1)
+
+    # Run pairing
+    for nb in notebooks:
+        print(f"{'Would pair:' if dry else 'Pairing:'} {nb}")
+        if not dry:
+            cmd = ["jupytext", "--set-formats", "ipynb,py:percent", str(nb)]
+            ctx.run(" ".join(shlex.quote(x) for x in cmd), pty=(_HOST_SYSTEM != "Windows"))
+
+    print(f"{len(notebooks)} notebook(s) {'would be paired' if dry else 'paired'}.")
