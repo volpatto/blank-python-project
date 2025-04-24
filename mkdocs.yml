@@ -12,11 +12,14 @@ theme:
   features:
     - navigation.instant
     - content.code.copy
+    - content.code.annotate
     - content.action.view
     - content.action.edit
     - content.tooltips
     - navigation.indexes
     - navigation.top
+    - navigation.sections
+    # - navigation.tabs  # enable to have nav bar at the top
     - search.suggest
     - toc.follow
   palette:
@@ -53,6 +56,11 @@ plugins:
               paths: [src]
               options:
                 docstring_style: sphinx
+                heading_level: 2
+                parameter_headings: false
+                show_root_heading: true
+                show_symbol_type_heading: true
+                show_symbol_type_toc: false
   - mkdocs-jupyter:
       include: ["**/*.ipynb"]
       execute: false
@@ -65,9 +73,10 @@ plugins:
 
 # Define the navigation bar
 nav:
-  - Home: index.md
-  - Background: background.md
-  - API Reference: reference.md
+  - General:
+    - Home: index.md
+    - Background: background.md
+    - API Reference: reference.md
   - Notebooks:
     - Overview: notebooks.md
     - Tutorials: '!include ./notebooks/mkdocs.yml'
