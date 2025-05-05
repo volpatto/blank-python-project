@@ -290,31 +290,31 @@ package:
   category: main
   optional: false
 - name: cachecontrol
-  version: 0.14.2
+  version: 0.14.3
   manager: conda
   platform: win-64
   dependencies:
     msgpack-python: '>=0.5.2,<2.0.0'
     python: '>=3.9'
     requests: '>=2.16.0'
-  url: https://conda.anaconda.org/conda-forge/noarch/cachecontrol-0.14.2-pyha770c72_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/cachecontrol-0.14.3-pyha770c72_0.conda
   hash:
-    md5: df6a1180171318e6a58c206c38ff66fd
-    sha256: 5684d23509525b65dd019a70bbb73c987a5d64177c0ce3def3dfdb175687ea27
+    md5: 241ef6e3db47a143ac34c21bfba510f1
+    sha256: ec791bb6f1ef504411f87b28946a7ae63ed1f3681cefc462cf1dfdaf0790b6a9
   category: main
   optional: false
 - name: cachecontrol-with-filecache
-  version: 0.14.2
+  version: 0.14.3
   manager: conda
   platform: win-64
   dependencies:
-    cachecontrol: 0.14.2
+    cachecontrol: 0.14.3
     filelock: '>=3.8.0'
     python: '>=3.9'
-  url: https://conda.anaconda.org/conda-forge/noarch/cachecontrol-with-filecache-0.14.2-pyhd8ed1ab_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/cachecontrol-with-filecache-0.14.3-pyhd8ed1ab_0.conda
   hash:
-    md5: 193d7362ba6d1b551ffe7b1da103f47f
-    sha256: cee46674041043c046232c6334b25487caa5c3d57c8b78adec0265afade4bda3
+    md5: b4af8c1b61929b1bcb001c2953882149
+    sha256: 4ba4d08fba095556b7f1e06ec1dca068b367e68aadab0aca73115d02ddfcd518
   category: main
   optional: false
 - name: cached-property
@@ -395,15 +395,15 @@ package:
   category: main
   optional: false
 - name: charset-normalizer
-  version: 3.4.1
+  version: 3.4.2
   manager: conda
   platform: win-64
   dependencies:
     python: '>=3.9'
-  url: https://conda.anaconda.org/conda-forge/noarch/charset-normalizer-3.4.1-pyhd8ed1ab_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/charset-normalizer-3.4.2-pyhd8ed1ab_0.conda
   hash:
-    md5: e83a31202d1c0a000fce3e9cf3825875
-    sha256: 4e0ee91b97e5de3e74567bdacea27f0139709fceca4db8adffbe24deffccb09b
+    md5: 40fe4284b8b5835a9073a645139f35af
+    sha256: 535ae5dcda8022e31c6dc063eb344c80804c537a5a04afba43a845fa6fa130f5
   category: main
   optional: false
 - name: click
@@ -2158,10 +2158,10 @@ package:
     ucrt: '>=10.0.20348.0'
     vc: '>=14.2,<15'
     vc14_runtime: '>=14.29.30139'
-  url: https://conda.anaconda.org/conda-forge/win-64/openssl-3.5.0-ha4e3fda_0.conda
+  url: https://conda.anaconda.org/conda-forge/win-64/openssl-3.5.0-ha4e3fda_1.conda
   hash:
-    md5: 4ea7db75035eb8c13fa680bb90171e08
-    sha256: 43dd7f56da142ca83c614c8b0085589650ae9032b351a901c190e48eefc73675
+    md5: 72c07e46b6766bb057018a9a74861b89
+    sha256: 02846553d2a4c9bde850c60824d0f02803eb9c9b674d5c1a8cce25bc387e748f
   category: main
   optional: false
 - name: overrides
@@ -2449,17 +2449,17 @@ package:
   category: main
   optional: false
 - name: pymdown-extensions
-  version: 10.14.3
+  version: '10.15'
   manager: conda
   platform: win-64
   dependencies:
     markdown: '>=3.6'
     python: '>=3.9'
     pyyaml: ''
-  url: https://conda.anaconda.org/conda-forge/noarch/pymdown-extensions-10.14.3-pyhd8ed1ab_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/pymdown-extensions-10.15-pyhd8ed1ab_0.conda
   hash:
-    md5: 08bf3657d03e1ee964c66288f5b3d797
-    sha256: 83b638059eda5208e2e4acfeecf2ff53b5dcb1adc7d85fc92edf0e7a48b943eb
+    md5: 9d03ff5deacac960acadb5b2044f0763
+    sha256: 9f5f77029f435fe489cf256580296cb5204ea4239dfde6db47629aa009a25015
   category: main
   optional: false
 - name: pyproject_hooks
@@ -2889,7 +2889,7 @@ package:
   category: main
   optional: false
 - name: ruff
-  version: 0.11.7
+  version: 0.11.8
   manager: conda
   platform: win-64
   dependencies:
@@ -2898,10 +2898,10 @@ package:
     ucrt: '>=10.0.20348.0'
     vc: '>=14.2,<15'
     vc14_runtime: '>=14.29.30139'
-  url: https://conda.anaconda.org/conda-forge/win-64/ruff-0.11.7-py311h7bc0161_0.conda
+  url: https://conda.anaconda.org/conda-forge/win-64/ruff-0.11.8-py311h7bc0161_0.conda
   hash:
-    md5: 428a9f207e33ce2e90429516d4765971
-    sha256: dac351255fd14f1ad2ff4045ffab2294c2bf3c08b2af580db90a6bda7f4e5dbd
+    md5: a1403c6994a6b88b2d041fc29b0365da
+    sha256: 6b9e1060e6f4227f815bd4414ebc65484eea81bd15c2594aa71dd5d9e1cfb56b
   category: main
   optional: false
 - name: scipy
@@ -2951,15 +2951,15 @@ package:
   category: main
   optional: false
 - name: setuptools
-  version: 79.0.1
+  version: 80.1.0
   manager: conda
   platform: win-64
   dependencies:
     python: '>=3.9'
-  url: https://conda.anaconda.org/conda-forge/noarch/setuptools-79.0.1-pyhff2d567_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/setuptools-80.1.0-pyhff2d567_0.conda
   hash:
-    md5: fa6669cc21abd4b7b6c5393b7bc71914
-    sha256: 5ebc4bb71fbdc8048b08848519150c8d44b8eb18445711d3258c9d402ba87a2c
+    md5: f6f72d0837c79eaec77661be43e8a691
+    sha256: 777d34ed359cedd5a5004c930077c101bb3b70e5fbb04d29da5058d75b0ba487
   category: main
   optional: false
 - name: shellingham
@@ -3171,15 +3171,15 @@ package:
   category: main
   optional: false
 - name: trove-classifiers
-  version: 2025.4.11.15
+  version: 2025.5.1.12
   manager: conda
   platform: win-64
   dependencies:
     python: '>=3.9'
-  url: https://conda.anaconda.org/conda-forge/noarch/trove-classifiers-2025.4.11.15-pyhd8ed1ab_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/trove-classifiers-2025.5.1.12-pyhd8ed1ab_0.conda
   hash:
-    md5: cb035e6070d809099f5db5c4b63a5c40
-    sha256: f9c348a4f74e99befe0c6e69a5868a2b078eb00f8def94c24378499af4d2834b
+    md5: 10e340fae03a3ec889581fb8c20cc67f
+    sha256: 8c25fe25f14c1cfed2b6c390c66fbd1f198c3463aa92858eb2383c7a2da71cf2
   category: main
   optional: false
 - name: types-python-dateutil
@@ -3511,9 +3511,9 @@ package:
     ucrt: '>=10.0.20348.0'
     vc: '>=14.2,<15'
     vc14_runtime: '>=14.29.30139'
-  url: https://conda.anaconda.org/conda-forge/win-64/zstandard-0.23.0-py311he736701_1.conda
+  url: https://conda.anaconda.org/conda-forge/win-64/zstandard-0.23.0-py311he736701_2.conda
   hash:
-    md5: a4c147aaaf7e284762d7a6acc49e35e5
-    sha256: 78afa8ce76763993a76da1b0120b690cba8926271cc9e0462f66155866817c84
+    md5: 8355ec073f73581e29adf77c49096aed
+    sha256: aaae40057eac5b5996db4e6b3d8eb00d38455e67571e796135d29702a19736bd
   category: main
   optional: false
