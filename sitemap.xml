@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://volpatto.github.io/blank-python-project/</loc>
+         <lastmod>2025-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://volpatto.github.io/blank-python-project/background/</loc>
+         <lastmod>2025-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://volpatto.github.io/blank-python-project/notebooks/</loc>
+         <lastmod>2025-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://volpatto.github.io/blank-python-project/reference/</loc>
+         <lastmod>2025-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://volpatto.github.io/blank-python-project/Tutorials/fancy_demonstration/</loc>
+         <lastmod>2025-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>

@@ -1,0 +1,10 @@
+/* hide Jupyter In[ ]/Out[ ] prompt numbers, keep all code & outputs */
+div.jp-InputPrompt,
+div.jp-OutputPrompt,
+div.prompt,
+div.input_prompt,
+div.output_prompt {
+  display: none !important;
+  margin-left: 0 !important;
+  width: auto !important;
+}
